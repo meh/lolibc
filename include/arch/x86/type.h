@@ -19,14 +19,9 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_STRING_H
-#define _LOLIBC_STRING_H
-
-#include <common.h>
-
-PUBLIC size_t strlen (const char* s);
-
-PUBLIC char* strcat (char* dest, const char* src);
-PUBLIC char* strncat (char* dest, const char* src, size_t n);
-
+#ifndef _LOLIBC_ARCH_TYPE_H
+#   error "Don't include this directly, faggot."
 #endif
+
+typedef unsigned int size_t;
+

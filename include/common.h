@@ -19,14 +19,15 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_STRING_H
-#define _LOLIBC_STRING_H
+#ifndef _LOLIBC_COMMON_H
+#define _LOLIBC_COMMON_H
 
-#include <common.h>
+#ifdef __cplusplus
+#   define PUBLIC extern "C"
+#else
+#   define PUBLIC extern
+#endif
 
-PUBLIC size_t strlen (const char* s);
-
-PUBLIC char* strcat (char* dest, const char* src);
-PUBLIC char* strncat (char* dest, const char* src, size_t n);
+#include <arch/type.h>
 
 #endif

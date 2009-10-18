@@ -19,14 +19,13 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_STRING_H
-#define _LOLIBC_STRING_H
+#ifndef _LOLIBC_ARCH_TYPE_H
+#define _LOLIBC_ARCH_TYPE_H
 
-#include <common.h>
-
-PUBLIC size_t strlen (const char* s);
-
-PUBLIC char* strcat (char* dest, const char* src);
-PUBLIC char* strncat (char* dest, const char* src, size_t n);
+#ifdef _LOLIBC_X86
+#   include <arch/x86/type.h>
+#else
+#   error "You forgot to choose an arch?"
+#endif
 
 #endif
