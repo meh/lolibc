@@ -28,4 +28,8 @@
 #   error "You forgot to choose an arch?"
 #endif
 
+#ifdef __cplusplus
+#   define NULL 0
+#endif
+
 #endif
