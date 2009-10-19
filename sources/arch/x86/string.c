@@ -22,7 +22,7 @@
 #include <arch/string.h>
 
 size_t
-__strlen (const char* s)
+__x86_strlen (const char* s)
 {
     size_t i = 0;
 
@@ -34,9 +34,9 @@ __strlen (const char* s)
 }
 
 char*
-__strcat (char* dest, const char* src)
+__x86_strcat (char* dest, const char* src)
 {
-    size_t i = __strlen(dest);
+    size_t i = __x86_strlen(dest);
     size_t h = 0;
 
     do {
@@ -48,9 +48,9 @@ __strcat (char* dest, const char* src)
 }
 
 char*
-__strncat (char* dest, const char* src, size_t n)
+__x86_strncat (char* dest, const char* src, size_t n)
 {
-    size_t i = __strlen(dest);
+    size_t i = __x86_strlen(dest);
     size_t h = 0;
 
     do {

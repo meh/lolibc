@@ -24,8 +24,9 @@
 #endif
 
 #include <common.h>
+#include <arch/api.h>
 
-size_t __strlen (const char* s);
+size_t __x86_strlen (const char* s);
 
-char* __strcat (char* dest, const char* src);
-char* __strncat (char* dest, const char* src, size_t n);
+char* __x86_strcat (char* dest, const char* src);
+char* __x86_strncat (char* dest, const char* src, size_t n);

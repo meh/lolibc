@@ -22,6 +22,8 @@
 #ifndef _LOLIBC_ARCH_STRING_H
 #define _LOLIBC_ARCH_STRING_H
 
+#include <arch/api.h>
+
 #ifdef _LOLIBC_X86
 #   include <arch/x86/string.h>
 #else
