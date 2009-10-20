@@ -25,15 +25,15 @@
 #include <common.h>
 
 typedef struct va_list {
-    int* address;
+    long* address;
 } va_list;
 
-#define va_start(arg, first) (arg.address = (int*) (&first + 1))
+#define va_start(arg, first) (arg.address = (long*) (&first + 1))
 
 #define va_copy(src, dest) (dest.address = src.address)
 
 #define va_end(arg) (arg.address = NULL)
 
-#define va_arg(arg, type) (* (((type*) (arg.address = (int*) ((type*) arg.address) + 1)) - 1))
+#define va_arg(arg, type) (* (((type*) (arg.address = (long*) ((type*) arg.address) + 1)) - 1))
 
 #endif
