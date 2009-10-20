@@ -19,12 +19,21 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
+#ifndef _LOLIBC_STDARG_H
+#define _LOLIBC_STDARG_H
+
 #include <common.h>
 
-typedef int* va_list;
+typedef struct va_list {
+    int* address;
+} va_list;
 
-#define va_start(arg, first) (arg = (va_list) (&first + 1))
+#define va_start(arg, first) (arg.address = (int*) (&first + 1))
 
-#define va_arg(arg, type) (* (((type*) (arg = (va_list) ((type*) arg) + 1)) - 1))
+#define va_copy(src, dest) (dest.address = src.address)
 
-#define va_end(arg) (arg = NULL)
+#define va_end(arg) (arg.address = NULL)
+
+#define va_arg(arg, type) (* (((type*) (arg.address = (int*) ((type*) arg.address) + 1)) - 1))
+
+#endif
