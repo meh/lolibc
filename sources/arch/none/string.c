@@ -23,7 +23,7 @@
 #include <arch/string.h>
 
 size_t
-__none_strlen (const char* s)
+__strlen (const char* s)
 {
     if (!s) {
         return 0;
@@ -39,13 +39,13 @@ __none_strlen (const char* s)
 }
 
 char*
-__none_strcat (char* dest, const char* src)
+__strcat (char* dest, const char* src)
 {
     if (!dest || !src) {
         return NULL;
     }
 
-    size_t i = __none_strlen(dest);
+    size_t i = __strlen(dest);
     size_t h = 0;
 
     while (src[h] != '\0') {
@@ -53,23 +53,27 @@ __none_strcat (char* dest, const char* src)
         i++; h++;
     }
 
+    dest[i] = '\0';
+
     return dest;
 }
 
 char*
-__none_strncat (char* dest, const char* src, size_t n)
+__strncat (char* dest, const char* src, size_t n)
 {
     if (!dest || !src || !n) {
         return NULL;
     }
 
-    size_t i = __none_strlen(dest);
+    size_t i = __strlen(dest);
     size_t h = 0;
 
     while (src[h] != '\0' && h < n) {
         dest[i] = src[h];
         i++; h++;
     }
+
+    dest[i] = '\0';
 
     return dest;
 }

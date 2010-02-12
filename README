@@ -2,6 +2,7 @@ lolibc - C library implementation.
 
 Will be completed when we'll get to run POSIX shit, for clang purposes.
 
-Requirements:
-    clang-1.0
-    >=ruby-1.8
+Used software:
+    - sys-devel/clang-1.0
+    - dev-lang/ruby-1.8.7
+    - dev-ruby/rake-0.8.7
