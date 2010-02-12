@@ -7,7 +7,8 @@ RELEASE = '0.0.1'
 CC = 'clang'
 AR = 'ar'
 
-CFLAGS = '-fPIC -Wall -Wextra -Winline -Wno-long-long -nostartfiles -nostdlib -nodefaultlibs -fno-builtin -finline-functions -I./include'
+CFLAGS  = '-fPIC -Wall -Wextra -Winline -Wno-long-long -nostdlib -nodefaultlibs -fno-builtin -finline-functions -I./include'
+LDFLAGS = '-s'
 
 CLEAN.include('sources/**/*.o', 'include/features.h')
 CLOBBER.include('*.so.*', '*.a')
@@ -61,7 +62,7 @@ end
 task :compile => [:features].concat(OBJECTS)
 
 file "lib#{NAME}.so.#{RELEASE}" => :compile do
-    sh "#{CC} #{CFLAGS} -shared -Wl,-soname,lib#{NAME}.so.#{RELEASE} -o lib#{NAME}.so.#{RELEASE} #{OBJECTS}"
+    sh "#{CC} #{LDFLAGS} #{CFLAGS} -shared -Wl,-soname,lib#{NAME}.so.#{RELEASE} -o lib#{NAME}.so.#{RELEASE} #{OBJECTS}"
 end
 
 file "lib#{NAME}.a" => :compile do

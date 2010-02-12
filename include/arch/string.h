@@ -28,5 +28,6 @@ inline char* __strcat (char* dest, const char* src);
 inline char* __strncat (char* dest, const char* src, size_t n);
 
 inline void* __memcpy (void* dest, const void* src, size_t n);
+inline void* __memset (void* s, int c, size_t n);
 
 #endif
