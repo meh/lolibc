@@ -25,25 +25,39 @@
 size_t
 __x86_strlen (const char* s)
 {
-    size_t i = 0;
-
-    while (s[i] != '\0') {
-        i++;
+    if (!s) {
+        return 0;
     }
 
-    return i;
+    size_t length;
+
+    asm volatile (
+        "movl $0, %%ecx \n"
+        "cld \n"
+        "repne scasb \n"
+        "notl %%ecx \n"
+        "decl %%ecx \n"
+        "movl %%ecx, %0"
+        : "=a" (length)
+    );
+
+    return length;
 }
 
 char*
 __x86_strcat (char* dest, const char* src)
 {
+    if (!dest || !src) {
+        return NULL;
+    }
+
     size_t i = __x86_strlen(dest);
     size_t h = 0;
 
-    do {
+    while (src[h] != '\0') {
         dest[i] = src[h];
         i++; h++;
-    } while (src[h] != '\0');
+    }
 
     return dest;
 }
@@ -51,13 +65,17 @@ __x86_strcat (char* dest, const char* src)
 char*
 __x86_strncat (char* dest, const char* src, size_t n)
 {
+    if (!dest || !src || !n) {
+        return NULL;
+    }
+
     size_t i = __x86_strlen(dest);
     size_t h = 0;
 
-    do {
+    while (src[h] != '\0' && h < n) {
         dest[i] = src[h];
         i++; h++;
-    } while (src[h] != '\0' && h < n);
+    }
 
     return dest;
 }

@@ -1,0 +1,12 @@
+#! /bin/bash
+
+clang -I../include -o test/string test/string.c
+RESULT=$(test/string)
+
+if [[ $? != 0 || $RESULT != 3 ]]; then
+    echo "test/string failed."
+    exit 0
+else
+    echo "test/string passed."
+fi
+

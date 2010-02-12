@@ -3,7 +3,7 @@ NAME    = lolibc
 
 CC     = clang
 AR     = ar
-CFLAGS = -fPIC -Wall -Wextra -Winline -Wno-long-long -pedantic -nostartfiles -nostdlib -nodefaultlibs -fno-builtin -I./include
+CFLAGS = -fPIC -Wall -Wextra -Winline -Wno-long-long -nostartfiles -nostdlib -nodefaultlibs -fno-builtin -I./include
 
 ifdef 32bit
 CFLAGS += -m32
