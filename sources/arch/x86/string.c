@@ -20,10 +20,10 @@
 ****************************************************************************/
 
 #include <string.h>
-#include <lolibc/arch/string.h>
+#include <arch/string.h>
 
 size_t
-__x86_strlen (const char* s)
+__strlen (const char* s)
 {
     if (!s) {
         return 0;
@@ -45,13 +45,13 @@ __x86_strlen (const char* s)
 }
 
 char*
-__x86_strcat (char* dest, const char* src)
+__strcat (char* dest, const char* src)
 {
     if (!dest || !src) {
         return NULL;
     }
 
-    size_t i = __x86_strlen(dest);
+    size_t i = __strlen(dest);
     size_t h = 0;
 
     while (src[h] != '\0') {
@@ -63,13 +63,13 @@ __x86_strcat (char* dest, const char* src)
 }
 
 char*
-__x86_strncat (char* dest, const char* src, size_t n)
+__strncat (char* dest, const char* src, size_t n)
 {
     if (!dest || !src || !n) {
         return NULL;
     }
 
-    size_t i = __x86_strlen(dest);
+    size_t i = __strlen(dest);
     size_t h = 0;
 
     while (src[h] != '\0' && h < n) {

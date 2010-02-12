@@ -24,6 +24,10 @@ case ENV['ARCH']
         ASM_SOURCES.include('sources/arch/none/**.S')
 end
 
+if ENV['32bit']
+    CFLAGS << ' -m32'
+end
+
 C_OBJECTS   = C_SOURCES.ext('o')
 ASM_OBJECTS = ASM_SOURCES.ext('S.o')
 
@@ -70,4 +74,12 @@ end
 
 file "lib#{NAME}.a" => :compile do
     sh "#{AR} rcs lib#{NAME}.a #{OBJECTS}"
+end
+
+task :help do
+    puts %{\
+Options:
+    32bit:  force 32 bit on 64 bit platform
+    ARCH:   x86
+}
 end
