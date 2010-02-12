@@ -19,15 +19,15 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_COMMON_H
-#define _LOLIBC_COMMON_H
+#ifndef _LOLIBC_ARCH_STRING_H
+#define _LOLIBC_ARCH_STRING_H
 
-#ifdef __cplusplus
-#   define PUBLIC extern "C"
+#include <lolibc/arch/api.h>
+
+#ifdef _LOLIBC_X86
+#   include <lolibc/arch/x86/string.h>
 #else
-#   define PUBLIC extern
+#   error "You forgot to choose an arch?"
 #endif
-
-#include <arch/type.h>
 
 #endif

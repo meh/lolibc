@@ -19,17 +19,9 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_ARCH_TYPE_H
-#define _LOLIBC_ARCH_TYPE_H
-
-#ifdef _LOLIBC_X86
-#   include <arch/x86/type.h>
-#else
-#   error "You forgot to choose an arch?"
+#ifndef _LOLIBC_STDDEF_H
+#   error "Don't include this directly, faggot."
 #endif
 
-#ifdef __cplusplus
-#   define NULL 0
-#endif
+typedef unsigned int size_t;
 
-#endif

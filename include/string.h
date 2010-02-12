@@ -22,7 +22,7 @@
 #ifndef _LOLIBC_STRING_H
 #define _LOLIBC_STRING_H
 
-#include <common.h>
+#include <stddef.h>
 
 PUBLIC size_t strlen (const char* s);
 

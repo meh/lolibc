@@ -19,15 +19,15 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_ARCH_STRING_H
-#define _LOLIBC_ARCH_STRING_H
+#ifndef _LOLIBC_STDDEF_H
+#define _LOLIBC_STDDEF_H
 
-#include <arch/api.h>
+#include <features.h>
 
-#ifdef _LOLIBC_X86
-#   include <arch/x86/string.h>
-#else
-#   error "You forgot to choose an arch?"
-#endif
+#define NULL 0
+
+#define offsetof(type, member) (size_t) &(((type*) 0)->member)
+
+#include <lolibc/arch/stddef.h>
 
 #endif

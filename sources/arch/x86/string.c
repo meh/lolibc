@@ -19,7 +19,8 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <arch/string.h>
+#include <string.h>
+#include <lolibc/arch/string.h>
 
 size_t
 __x86_strlen (const char* s)

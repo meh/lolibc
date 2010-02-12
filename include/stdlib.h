@@ -19,21 +19,5 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_STDARG_H
-#define _LOLIBC_STDARG_H
-
 #include <stddef.h>
 
-typedef struct va_list {
-    long* address;
-} va_list;
-
-#define va_start(arg, first) (arg.address = (long*) (&first + 1))
-
-#define va_copy(src, dest) (dest.address = src.address)
-
-#define va_end(arg) (arg.address = NULL)
-
-#define va_arg(arg, type) (* (((type*) (arg.address = (long*) ((type*) arg.address) + 1)) - 1))
-
-#endif
