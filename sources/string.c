@@ -40,3 +40,8 @@ strncat (char* dest, const char* src, size_t n)
     return __strncat(dest, src, n);
 }
 
+void*
+memcpy (void* dest, const void* src, size_t n)
+{
+    return __memcpy(dest, src, n);
+}

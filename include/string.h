@@ -29,4 +29,6 @@ PUBLIC size_t strlen (const char* s);
 PUBLIC char* strcat (char* dest, const char* src);
 PUBLIC char* strncat (char* dest, const char* src, size_t n);
 
+PUBLIC void* memcpy (void* dest, const void* src, size_t n);
+
 #endif

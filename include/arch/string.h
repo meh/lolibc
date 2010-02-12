@@ -19,7 +19,14 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
+#ifndef _LOLIBC_ARCH_STRING_H
+#define _LOLIBC_ARCH_STRING_H
+
 inline size_t __strlen (const char* s);
 
 inline char* __strcat (char* dest, const char* src);
 inline char* __strncat (char* dest, const char* src, size_t n);
+
+inline void* __memcpy (void* dest, const void* src, size_t n);
+
+#endif
