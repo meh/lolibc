@@ -20,7 +20,7 @@
 ****************************************************************************/
 
 #include <string.h>
-#include <lolibc/arch/string.h>
+#include <arch/string.h>
 
 size_t
 __none_strlen (const char* s)

@@ -7,9 +7,9 @@ RELEASE = '0.0.1'
 CC = 'clang'
 AR = 'ar'
 
-CFLAGS = "-fPIC -Wall -Wextra -Winline -Wno-long-long -nostartfiles -nostdlib -nodefaultlibs -fno-builtin -I./include"
+CFLAGS = '-fPIC -Wall -Wextra -Winline -Wno-long-long -nostartfiles -nostdlib -nodefaultlibs -fno-builtin -I./include'
 
-CLEAN.include('**.o', 'includes/features.h')
+CLEAN.include('sources/**/*.o', 'include/features.h')
 CLOBBER.include('*.so.*', '*.a')
 
 C_SOURCES   = FileList['sources/*.c']
@@ -31,18 +31,18 @@ OBJECTS = FileList.new
 OBJECTS.include(C_OBJECTS)
 OBJECTS.include(ASM_OBJECTS)
 
-task :default => ['lolibc.so', 'lolibc.a']
+task :default => ["lib#{NAME}.so.#{RELEASE}", "lib#{NAME}.a"]
 
 rule '.o' => '.c' do |t|
-    sh "#{CC} #{CFLAGS} -o #{t.name} #{t.source}"
+    sh "#{CC} #{CFLAGS} -o #{t.name} -c #{t.source}"
 end
 
-task :features do |t|
-    file = File.new("include/features.h", "w")
+task :features do
+    file = File.new('include/features.h', 'w')
 
     file.write(%{\
 #ifndef _LOLIBC_FEATURES_H
-#ifndef _LOLIBC_FEATURES_H
+#define _LOLIBC_FEATURES_H
 
 #ifdef _cplusplus
 #   define  __BEGIN_NAMESPACE(name) namespace ## name {
@@ -62,12 +62,12 @@ task :features do |t|
     file.close
 end
 
-task :compile => [:features, OBJECTS]
+task :compile => [:features].concat(OBJECTS)
 
-file 'lolibc.so' => [:compile] do
-    sh "#{CC} #{CFLAGS} -shared -Wl,-soname,lib#{NAME}.so.#{RELEASE} #{OBJECTS}"
+file "lib#{NAME}.so.#{RELEASE}" => :compile do
+    sh "#{CC} #{CFLAGS} -shared -Wl,-soname,lib#{NAME}.so.#{RELEASE} -o lib#{NAME}.so.#{RELEASE} #{OBJECTS}"
 end
 
-file 'lolibc.a' => [:compile] do
-    sh "#{AR} rcs liblolibc.a #{OBJECTS}"
+file "lib#{NAME}.a" => :compile do
+    sh "#{AR} rcs lib#{NAME}.a #{OBJECTS}"
 end
