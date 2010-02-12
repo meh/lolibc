@@ -7,7 +7,7 @@ RELEASE = '0.0.1'
 CC = 'clang'
 AR = 'ar'
 
-CFLAGS = '-fPIC -Wall -Wextra -Winline -Wno-long-long -nostartfiles -nostdlib -nodefaultlibs -fno-builtin -I./include'
+CFLAGS = '-fPIC -Wall -Wextra -Winline -Wno-long-long -nostartfiles -nostdlib -nodefaultlibs -fno-builtin -finline-functions -I./include'
 
 CLEAN.include('sources/**/*.o', 'include/features.h')
 CLOBBER.include('*.so.*', '*.a')
