@@ -20,23 +20,23 @@
 ****************************************************************************/
 
 #include <string.h>
-#include <lolibc/arch/string.h>
+#include <arch/string.h>
 
 size_t
 strlen (const char* s)
 {
-    return ARCH_CURRENT_FUNCTION(strlen)(s);
+    return __strlen(s);
 }
 
 char*
 strcat (char* dest, const char* src)
 {
-    return ARCH_CURRENT_FUNCTION(strcat)(dest, src);
+    return __strcat(dest, src);
 }
 
 char*
 strncat (char* dest, const char* src, size_t n)
 {
-    return ARCH_CURRENT_FUNCTION(strncat)(dest, src, n);
+    return __strncat(dest, src, n);
 }
 

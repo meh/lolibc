@@ -28,6 +28,6 @@
 
 #define offsetof(type, member) (size_t) &(((type*) 0)->member)
 
-#include <lolibc/arch/stddef.h>
+typedef unsigned int size_t;
 
 #endif

@@ -4,3 +4,4 @@ Will be completed when we'll get to run POSIX shit, for clang purposes.
 
 Requirements:
     clang-1.0
+    >=ruby-1.8

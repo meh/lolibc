@@ -19,16 +19,58 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_ARCH_H
-#define _LOLIBC_ARCH_H
+#include <string.h>
+#include <lolibc/arch/string.h>
 
-#define ARCH_FUNCTION(func, arch) __## arch ##_## func
+size_t
+__none_strlen (const char* s)
+{
+    if (!s) {
+        return 0;
+    }
 
-#ifdef _LOLIBC_X86
-#   define ARCH_CURRENT_FUNCTION(func) ARCH_FUNCTION(func, x86)
-#else
-#   error "You forgot to choose an arch?"
-#endif
+    size_t length = 0;
 
+    while (s[length] != '\0') {
+        length++;
+    }
 
-#endif
+    return length;
+}
+
+char*
+__none_strcat (char* dest, const char* src)
+{
+    if (!dest || !src) {
+        return NULL;
+    }
+
+    size_t i = __none_strlen(dest);
+    size_t h = 0;
+
+    while (src[h] != '\0') {
+        dest[i] = src[h];
+        i++; h++;
+    }
+
+    return dest;
+}
+
+char*
+__none_strncat (char* dest, const char* src, size_t n)
+{
+    if (!dest || !src || !n) {
+        return NULL;
+    }
+
+    size_t i = __none_strlen(dest);
+    size_t h = 0;
+
+    while (src[h] != '\0' && h < n) {
+        dest[i] = src[h];
+        i++; h++;
+    }
+
+    return dest;
+}
+
