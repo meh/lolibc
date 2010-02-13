@@ -27,6 +27,10 @@ if ENV['32bit']
     CFLAGS << ' -m32'
 end
 
+if ENV['OPTIMIZED'] != 'false'
+    CFLAGS << ' -Os'
+end
+
 OBJECTS = SOURCES.ext('o')
 
 task :default => ["lib#{NAME}.so.#{RELEASE}", "lib#{NAME}.a"]
@@ -42,7 +46,7 @@ task :features do
 #ifndef _LOLIBC_FEATURES_H
 #define _LOLIBC_FEATURES_H
 
-#ifdef _cplusplus
+#ifdef __cplusplus
 #   define  __BEGIN_NAMESPACE(name) namespace ## name {
 #   define  __END_NAMESPACE }
 #
