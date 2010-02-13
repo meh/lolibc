@@ -17,11 +17,12 @@ SOURCES = FileList['sources/*.c']
 
 case ENV['ARCH']
     when 'x86'
-        SOURCES.include('sources/arch/x86/**.c')
         ENV['32bit'] = 'true'
     else
-        SOURCES.include('sources/arch/none/**.c')
+        ENV['ARCH'] = 'none'
 end
+
+SOURCES.include("sources/arch/#{ENV['ARCH']}/**.c")
 
 if ENV['32bit']
     CFLAGS << ' -m32'
