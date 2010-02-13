@@ -40,7 +40,7 @@ rule '.o' => '.c' do |t|
     sh "#{CC} #{CFLAGS} -o #{t.name} -c #{t.source}"
 end
 
-task :features do
+file 'include/features.h' do
     file = File.new('include/features.h', 'w')
 
     file.write(%{\
@@ -65,7 +65,7 @@ task :features do
     file.close
 end
 
-task :compile => [:features].concat(OBJECTS)
+task :compile => ['include/features.h'].concat(OBJECTS)
 
 file "lib#{NAME}.so.#{RELEASE}" => :compile do
     sh "#{CC} #{LDFLAGS} #{CFLAGS} -shared -Wl,-soname,lib#{NAME}.so.#{RELEASE} -o lib#{NAME}.so.#{RELEASE} #{OBJECTS}"
