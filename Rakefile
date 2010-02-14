@@ -126,9 +126,6 @@ file 'include/features.h' do
 #ifndef _LOLIBC_FEATURES_H
 #define _LOLIBC_FEATURES_H
 
-#define strong_alias(name, aliasname) extern __typeof (name) aliasname __attribute__ ((alias (#name)))
-#define weak_alias(name, aliasname) extern __typeof (name) aliasname __attribute__ ((alias (#name)))
-
 #ifdef __cplusplus
 #   define  __BEGIN_NAMESPACE(name) namespace ## name {
 #   define  __END_NAMESPACE }
@@ -140,6 +137,9 @@ file 'include/features.h' do
 #
 #   define PUBLIC extern
 #endif
+
+#define strong_alias(name, aliasname) PUBLIC __typeof (name) aliasname __attribute__ ((alias (#name)))
+#define weak_alias(name, aliasname) PUBLIC __typeof (name) aliasname __attribute__ ((weak, alias (#name)))
 
 #endif
 })

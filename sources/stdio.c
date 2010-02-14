@@ -26,6 +26,12 @@
 #include <stdio.h>
 #include <arch/stdio.h>
 
+int
+fputs (const char* string, FILE* stream)
+{
+
+}
+
 strong_alias(__printf, printf);
 
 strong_alias(__fprintf, fprintf);

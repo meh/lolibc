@@ -38,14 +38,20 @@ extern FILE* __stderr;
 
 #define EOF -1
 
-PUBLIC int printf (const char* format, ...);
+PUBLIC int fputs (const char* string, FILE* stream);
 
-PUBLIC int fprintf (FILE* stream, const char* format, ...);
+PUBLIC int __printf (const char* format, ...);
+strong_alias(__printf, printf);
 
-PUBLIC int sprintf (char* string, const char* format, ...);
+PUBLIC int __fprintf (FILE* stream, const char* format, ...);
+strong_alias(__fprintf, fprintf);
+
+PUBLIC int __sprintf (char* string, const char* format, ...);
+strong_alias(__sprintf, sprintf);
 
 #if defined(_BSD_SOURCE) || _XOPEN_SOURCE >= 500 || defined(_ISOC99_SOURCE)
-PUBLIC int snprintf (char* string, size_t limit, const char* format, ...);
+PUBLIC int __snprintf (char* string, size_t limit, const char* format, ...);
+strong_alias(__snprintf, snprintf);
 #endif
 
 #endif
