@@ -19,23 +19,20 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <arch/string.h>
+#ifndef _LOLIBC_STDIO_H
+#define _LOLIBC_STDIO_H
 
-size_t
-__strlen (const char* string)
-{
-    size_t length;
+#include <stddef.h>
+#include <stdarg.h>
 
-    asm volatile (
-        "cld \n"
-        "repne scasb \n"
-        "notl %%ecx \n"
-        "decl %%ecx \n"
-        "movl %%ecx, %0"
-        : "=c" (length) : "c" (string)
-        : "%ecx", "%esi", "%edi"
-    );
+#define EOF -1
 
-    return length;
-}
+PUBLIC int printf (const char* format, ...);
 
+PUBLIC int fprintf (FILE* stream, const char* format, ...);
+
+PUBLIC int sprintf (char* string, const char* format, ...);
+
+PUBLIC int snprintf (char* string, size_t limit, const char* format, ...);
+
+#endif

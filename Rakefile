@@ -7,18 +7,20 @@ RELEASE = '0.0.1'
 CC = 'clang'
 AR = 'ar'
 
-CFLAGS  = '-fPIC -Wall -Wextra -Winline -Wno-long-long -nostdlib -nodefaultlibs -fno-builtin -finline-functions -I./include'
+CFLAGS  = '-Wall -Wextra -Winline -Wno-long-long -nostdlib -nodefaultlibs -fno-builtin -finline-functions -I./include'
 LDFLAGS = '-s'
 
 CLEAN.include('sources/**/*.o', 'include/features.h')
-CLOBBER.include('*.so.*', '*.a')
+CLOBBER.include('*.so', '*.a')
 
 SOURCES = FileList['sources/*.c']
 
 case ENV['ARCH']
     when 'x86'
+        CFLAGS << ' -D_ARCH_X86'
         ENV['32bit'] = 'true'
     when 'x86_64'
+        CFLAGS << ' -D_ARCH_X86_64'
         ENV['64bit'] = 'true'
     else
         ENV['ARCH'] = 'none'
@@ -46,13 +48,20 @@ if ENV['OPTIMIZED'] != 'false'
     CFLAGS << ' -Os'
 end
 
+if !ENV['PLATFORM']
+    ENV['PLATFORM'] = 'Linux'
+end
+
+case ENV['PLATFORM']
+    when 'Linux'
+        CFLAGS << ' -D_PLATFORM_LINUX'
+end
+
+SOURCES.include("sources/platform/#{ENV['PLATFORM']}/**/*.c");
+
 OBJECTS = SOURCES.ext('o')
 
-task :default => ["lib#{NAME}.so.#{RELEASE}", "lib#{NAME}.a"]
-
-rule '.o' => '.c' do |t|
-    sh "#{CC} #{CFLAGS} -o #{t.name} -c #{t.source}"
-end
+task :default => ["lib#{NAME}.so", "lib#{NAME}.a"]
 
 file 'include/features.h' do
     file = File.new('include/features.h', 'w')
@@ -79,14 +88,50 @@ file 'include/features.h' do
     file.close
 end
 
+rule '.o' => '.c' do |t|
+    sh "#{CC} -fPIC #{CFLAGS} -o #{t.name} -c #{t.source}"
+end
+
 task :compile => ['include/features.h'].concat(OBJECTS)
 
-file "lib#{NAME}.so.#{RELEASE}" => :compile do
-    sh "#{CC} #{LDFLAGS} #{CFLAGS} -shared -Wl,-soname,lib#{NAME}.so.#{RELEASE} -o lib#{NAME}.so.#{RELEASE} #{OBJECTS}"
+file "lib#{NAME}.so" => :compile do
+    sh "#{CC} #{LDFLAGS} #{CFLAGS} -shared -Wl,-soname,lib#{NAME}.so -o lib#{NAME}.so #{OBJECTS}"
 end
 
 file "lib#{NAME}.a" => :compile do
     sh "#{AR} rcs lib#{NAME}.a #{OBJECTS}"
+end
+
+task :test do
+    tests = FileList['test/**/*.c']
+
+    tests.each {|test|
+        pipe   = IO.popen("#{CC} #{CFLAGS} -L./ -llolibc -o test/test #{test} 2>&1");
+        output = pipe.read.chomp
+        pipe.close
+
+        if (!output.empty?)
+            puts "#{test} failed to compile:\n"
+            puts "#{output}\n"
+            next
+        end
+
+        result = File.read(test).match(/Expected result: <<\n(.*?)\n>>/ims)[1]
+
+        pipe   = IO.popen('test/test');
+        output = pipe.read.chomp
+        pipe.close
+
+        if $? != 0 || output != result
+            puts "test/#{test} failed:"
+            puts "Expected output: #{result}"
+            puts "Received output: #{output}\n\n"
+        else
+            puts "test/#{test} passed."
+        end
+    }
+
+    File.delete('test/test')
 end
 
 task :help do

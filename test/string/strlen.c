@@ -1,8 +1,14 @@
+#if 0
+Expected result: <<
+3
+>>
+#endif
+
 #include <stdio.h>
 #include <string.h>
 
 int
-main (int argc, char** argv)
+main (void)
 {
     printf("%lu\n", strlen("lol"));
 

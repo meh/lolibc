@@ -19,23 +19,12 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <arch/string.h>
+#include <unistd.h>
+#include <platform/unistd.h>
 
-size_t
-__strlen (const char* string)
+ssize_t
+write (int fd, const void* buffer, size_t bytes)
 {
-    size_t length;
-
-    asm volatile (
-        "cld \n"
-        "repne scasb \n"
-        "notl %%ecx \n"
-        "decl %%ecx \n"
-        "movl %%ecx, %0"
-        : "=c" (length) : "c" (string)
-        : "%ecx", "%esi", "%edi"
-    );
-
-    return length;
+    return __write(fd, buffer, bytes);
 }
 
