@@ -24,14 +24,14 @@
 #include <arch/string.h>
 
 void*
-__rawmemchr (const void *s, int c)
+__rawmemchr (const void* memory, int compareTo)
 {
     size_t i = 0;
 
-    while (((char*) s)[i] != (char) c) {
+    while (((char*) memory)[i] != (char) compareTo) {
         i++;
     }
 
-    return &(((char*) s)[i]);
+    return (void*) &(((char*) memory)[i]);
 }
 

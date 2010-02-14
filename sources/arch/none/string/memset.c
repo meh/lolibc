@@ -22,14 +22,14 @@
 #include <arch/string.h>
 
 void*
-__memset (void* s, int c, size_t n)
+__memset (void* memory, int setTo, size_t bytes)
 {
     size_t i;
 
-    for (i = 0; i < n; i++) {
-        ((char*) s)[i] = (char) c;
+    for (i = 0; i < bytes; i++) {
+        ((char*) memory)[i] = (char) setTo;
     }
 
-    return s;
+    return memory;
 }
 

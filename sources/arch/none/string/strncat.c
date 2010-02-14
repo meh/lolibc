@@ -22,22 +22,22 @@
 #include <arch/string.h>
 
 char*
-__strncat (char* dest, const char* src, size_t n)
+__strncat (char* destination, const char* source, size_t limit)
 {
-    if (n == 0) {
+    if (limit == 0) {
         return NULL;
     }
 
-    size_t i = __strlen(dest);
+    size_t i = __strlen(destination);
     size_t h = 0;
 
-    while (src[h] != '\0' && h < n) {
-        dest[i] = src[h];
+    while (source[h] != '\0' && h < limit) {
+        destination[i] = source[h];
         i++; h++;
     }
 
-    dest[i] = '\0';
+    destination[i] = '\0';
 
-    return dest;
+    return destination;
 }
 

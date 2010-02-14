@@ -24,13 +24,13 @@
 #include <arch/string.h>
 
 void*
-__memrchr (const void *s, int c, size_t n)
+__memrchr (const void* memory, int compareTo, size_t bytes)
 {
     size_t i;
 
-    for (i = n-1; i >= 0; i++) {
-        if (((char*) s)[i] == (char) c) {
-            return &(((char*) s)[i]);
+    for (i = bytes-1; i >= 0; i++) {
+        if (((char*) memory)[i] == (char) compareTo) {
+            return (void*) &(((char*) memory)[i]);
         }
     }
 

@@ -22,18 +22,18 @@
 #include <arch/string.h>
 
 char*
-__strcat (char* dest, const char* src)
+__strcat (char* destination, const char* source)
 {
-    size_t i = __strlen(dest);
+    size_t i = __strlen(destination);
     size_t h = 0;
 
-    while (src[h] != '\0') {
-        dest[i] = src[h];
+    while (source[h] != '\0') {
+        destination[i] = source[h];
         i++; h++;
     }
 
-    dest[i] = '\0';
+    destination[i] = '\0';
 
-    return dest;
+    return destination;
 }
 

@@ -21,19 +21,26 @@
 
 #include <arch/string.h>
 
-char*
-__strchrnul (const char *s, int c)
+int
+__strncmp (const char *first, const char *second, size_t limit)
 {
-    size_t i = 0;
+    size_t i;
 
-    while (s[i] != '\0') {
-        if (s[i] == (char) c) {
-            break;
+    for (i = 0; i < limit && (first[i] != '\0' && second[i] != '\0'); i++) {
+        if (first[i] > second[i]) {
+            return 1;
         }
-
-        i++;
+        else if (first[i] < second[i]) {
+            return -1;
+        }
     }
 
-    return (char*) &s[i];
-}
+    if (first[i] == '\0' && second[i] != '\0') {
+        return -1;
+    }
+    else if (second[i] == '\0' && first[i] != '\0') {
+        return 1;
+    }
 
+    return 0;
+}

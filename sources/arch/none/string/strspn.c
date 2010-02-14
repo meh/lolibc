@@ -21,20 +21,30 @@
 
 #include <arch/string.h>
 
-int
-__memcmp (const void *first, const void *second, size_t limit)
+size_t
+__strspn (const char* string, const char* accept)
 {
-    size_t i;
+    size_t charsetLength = strlen(accept);
+    size_t h;
+    size_t i  = 0;
+    char   in = 1;
 
-    for (i = 0; i < limit; i++) {
-        if (((char*) first)[i] > ((char*) second)[i]) {
-            return 1;
+    while (string[i] != '\0') {
+        for (h = 0; h < charsetLength; h++) {
+            if (string[i] != accept[h]) {
+                in = 0;
+                break;
+            }
         }
-        else if (((char*) first)[i] < ((char*) second)[i]) {
-            return -1;
+
+        if (!in) {
+            break;
         }
+
+        in = 1;
+        i++;
     }
 
-    return 0;
+    return i;
 }
 

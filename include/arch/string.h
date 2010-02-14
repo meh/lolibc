@@ -24,37 +24,48 @@
 
 #include <string.h>
 
-inline void* __memccpy (void* dest, const void* src, int c, size_t n);
+inline void* __memccpy (void* destination, const void* source, int compareTo, size_t bytes);
 
-inline void* __memchr (const void *s, int c, size_t n);
-
-#ifdef _GNU_SOURCE
-inline void* __memrchr (const void *s, int c, size_t n);
-
-inline void* __rawmemchr (const void *s, int c);
-#endif
-
-inline int __memcmp (const void *s1, const void *s2, size_t n);
-
-inline void* __memcpy (void* dest, const void* src, size_t n);
-
-inline void* __memmove (void *dest, const void *src, size_t n);
-
-inline void* __memset (void* s, int c, size_t n);
-
-inline char* __strcat (char* dest, const char* src);
-
-inline char* __strncat (char* dest, const char* src, size_t n);
-
-inline char* __strchr (const char *s, int c);
-
-inline char* __strrchr (const char *s, int c);
+inline void* __memchr (const void* memory, int compareTo, size_t bytes);
 
 #ifdef _GNU_SOURCE
-inline char* __strchrnul (const char *s, int c);
+inline void* __memrchr (const void* memory, int compareTo, size_t bytes);
+
+inline void* __rawmemchr (const void* memory, int compareTo);
 #endif
 
-inline size_t __strlen (const char* s);
+inline int __memcmp (const void* first, const void* second, size_t bytes);
 
+inline void* __memcpy (void* destination, const void* source, size_t bytes);
+
+inline void* __memmove (void* destination, const void* source, size_t bytes);
+
+inline void* __memset (void* memory, int setTo, size_t bytes);
+
+inline char* __strcat (char* destination, const char* source);
+
+inline char* __strncat (char* destination, const char* source, size_t limit);
+
+inline char* __strchr (const char* string, int compareTo);
+
+inline char* __strrchr (const char* string, int compareTo);
+
+#ifdef _GNU_SOURCE
+inline char* __strchrnul (const char* string, int compareTo);
+#endif
+
+inline int __strcmp (const char* first, const char* second);
+
+inline int __strncmp(const char* first, const char* second, size_t limit);
+
+inline char* __strcpy (char* destination, const char* source);
+
+inline char* __strncpy (char* destination, const char* source, size_t limit);
+
+inline size_t __strspn (const char* string, const char* accept);
+
+inline size_t __strcspn (const char* string, const char* reject);
+
+inline size_t __strlen (const char* string);
 
 #endif

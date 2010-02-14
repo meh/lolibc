@@ -24,19 +24,19 @@
 #include <arch/string.h>
 
 void*
-__memmove (void *dest, const void *src, size_t n)
+__memmove (void *destination, const void *source, size_t limit)
 {
-    char*  tmp = (char*) malloc(n * sizeof(char));
+    char*  tmp = (char*) malloc(limit * sizeof(char));
     size_t i;
 
-    for (i = 0; i < n; i++) {
-        tmp[i] = ((char*) src)[i];
+    for (i = 0; i < limit; i++) {
+        tmp[i] = ((char*) source)[i];
     }
 
-    for (i = 0; i < n; i++) {
-        ((char*) dest)[i] = tmp[i];
+    for (i = 0; i < limit; i++) {
+        ((char*) destination)[i] = tmp[i];
     }
 
-    return dest;
+    return destination;
 }
 

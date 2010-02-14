@@ -22,13 +22,13 @@
 #include <arch/string.h>
 
 void*
-__memchr (const void *s, int c, size_t n)
+__memchr (const void* memory, int compareTo, size_t bytes)
 {
     size_t i;
 
-    for (i = 0; i < n; i++) {
-        if (((char*) s)[i] == (char) c) {
-            return &(((char*) s)[i]);
+    for (i = 0; i < bytes; i++) {
+        if (((char*) memory)[i] == (char) compareTo) {
+            return (void*) &(((char*) memory)[i]);
         }
     }
 

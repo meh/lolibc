@@ -22,15 +22,15 @@
 #include <arch/string.h>
 
 void*
-__memccpy (void* dest, const void* src, int c, size_t n)
+__memccpy (void* destination, const void* source, int compareTo, size_t bytes)
 {
     size_t i;
 
-    for (i = 0; i < n; i++) {
-        ((char*) dest)[i] = ((char*) src)[i];
+    for (i = 0; i < bytes; i++) {
+        ((char*) destination)[i] = ((char*) source)[i];
 
-        if (((char*) dest)[i] == c) {
-            return &((char*) dest)[i+1];
+        if (((char*) destination)[i] == compareTo) {
+            return (void*) &((char*) destination)[i+1];
         }
     }
 

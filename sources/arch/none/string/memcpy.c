@@ -22,14 +22,14 @@
 #include <arch/string.h>
 
 void*
-__memcpy (void* dest, const void* src, size_t n)
+__memcpy (void* destination, const void* source, size_t bytes)
 {
     size_t i;
     
-    for (i = 0; i < n; i++) {
-        ((char*) dest)[i] = ((char*) src)[i];
+    for (i = 0; i < bytes; i++) {
+        ((char*) destination)[i] = ((char*) source)[i];
     }
 
-    return dest;
+    return destination;
 }
 

@@ -21,13 +21,13 @@
 
 #include <arch/string.h>
 
-char* __strchr (const char *s, int c)
+char* __strchr (const char* string, int compareTo)
 {
     size_t i = 0;
 
-    while (s[i] != '\0') {
-        if (s[i] == (char) c) {
-            return (char*) &s[i];
+    while (string[i] != '\0') {
+        if (string[i] == (char) compareTo) {
+            return (char*) &string[i];
         }
 
         i++;

@@ -21,20 +21,19 @@
 
 #include <arch/string.h>
 
-int
-__memcmp (const void *first, const void *second, size_t limit)
+char*
+__strcpy (char* destination, const char* source)
 {
-    size_t i;
+    size_t i = 0;
 
-    for (i = 0; i < limit; i++) {
-        if (((char*) first)[i] > ((char*) second)[i]) {
-            return 1;
-        }
-        else if (((char*) first)[i] < ((char*) second)[i]) {
-            return -1;
-        }
+    while (source[i] != '\0') {
+        destination[i] = source[i];
+
+        i++;
     }
 
-    return 0;
+    destination[i] = '\0';
+
+    return destination;
 }
 

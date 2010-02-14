@@ -22,17 +22,26 @@
 #include <arch/string.h>
 
 int
-__memcmp (const void *first, const void *second, size_t limit)
+__strcmp (const char *first, const char *second)
 {
-    size_t i;
+    size_t i = 0;
 
-    for (i = 0; i < limit; i++) {
-        if (((char*) first)[i] > ((char*) second)[i]) {
+    while (first[i] != '\0' && second[i] != '\0') {
+        if (first[i] > second[i]) {
             return 1;
         }
-        else if (((char*) first)[i] < ((char*) second)[i]) {
+        else if (first[i] < second[i]) {
             return -1;
         }
+
+        i++;
+    }
+
+    if (first[i] == '\0' && second[i] != '\0') {
+        return -1;
+    }
+    else if (second[i] == '\0' && first[i] != '\0') {
+        return 1;
     }
 
     return 0;

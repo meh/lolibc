@@ -21,20 +21,19 @@
 
 #include <arch/string.h>
 
-int
-__memcmp (const void *first, const void *second, size_t limit)
+char*
+__strchrnul (const char* string, int compareTo)
 {
-    size_t i;
+    size_t i = 0;
 
-    for (i = 0; i < limit; i++) {
-        if (((char*) first)[i] > ((char*) second)[i]) {
-            return 1;
+    while (string[i] != '\0') {
+        if (string[i] == (char) compareTo) {
+            break;
         }
-        else if (((char*) first)[i] < ((char*) second)[i]) {
-            return -1;
-        }
+
+        i++;
     }
 
-    return 0;
+    return (char*) &string[i];
 }
 
