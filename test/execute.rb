@@ -1,7 +1,7 @@
 #! /usr/bin/env ruby
 
 tests = [
-    { :file => "strlen.c", :result => "3" }
+    { :file => 'string/strlen.c', :result => '3' }
 ];
 
 tests.each {|test|
@@ -14,7 +14,7 @@ tests.each {|test|
         puts "#{output}\n"
     end
 
-    pipe   = IO.popen("test/test");
+    pipe   = IO.popen('test/test');
     output = pipe.read.chomp
     pipe.close
 
@@ -27,4 +27,4 @@ tests.each {|test|
     end
 }
 
-File.delete("test/test")
+File.delete('test/test')

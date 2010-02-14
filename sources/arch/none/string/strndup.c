@@ -19,7 +19,7 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#define _GNU_SOURCE
+#define _GNU_SOURCE 1
 
 #include <errno.h>
 #include <stdlib.h>

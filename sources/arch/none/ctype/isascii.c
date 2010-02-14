@@ -19,19 +19,13 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#define _GNU_SOURCE 1
+#define _BSD_SOURCE
 
-#include <arch/string.h>
+#include <arch/ctype.h>
 
-void*
-__rawmemchr (const void* memory, int compareTo)
+int
+__isascii (int ch)
 {
-    size_t i = 0;
-
-    while (((char*) memory)[i] != (char) compareTo) {
-        i++;
-    }
-
-    return (void*) &(((char*) memory)[i]);
+    return (ch >= 0x00 && ch <= 0x7F);
 }
 

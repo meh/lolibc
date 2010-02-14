@@ -19,19 +19,36 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#define _GNU_SOURCE 1
-
 #include <arch/string.h>
 
-void*
-__rawmemchr (const void* memory, int compareTo)
+char*
+__strpbrk (const char* string, const char* accept)
 {
-    size_t i = 0;
+    size_t charsetLength = strlen(accept);
+    size_t h;
+    size_t i  = 0;
+    char   in = 0;
 
-    while (((char*) memory)[i] != (char) compareTo) {
+    while (string[i] != '\0') {
+        for (h = 0; h < charsetLength; h++) {
+            if (string[i] == accept[h]) {
+                in = 0;
+                break;
+            }
+        }
+
+        if (in) {
+            break;
+        }
+
+        in = 0;
         i++;
     }
 
-    return (void*) &(((char*) memory)[i]);
+    if (string[i] != '\0') {
+        return (char*) &string[i];
+    }
+
+    return NULL;
 }
 

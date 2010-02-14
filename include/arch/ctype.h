@@ -19,19 +19,45 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#define _GNU_SOURCE 1
+#ifndef _LOLIBC_ARCH_STRING_H
+#define _LOLIBC_ARCH_STRING_H
 
-#include <arch/string.h>
+#include <ctype.h>
 
-void*
-__rawmemchr (const void* memory, int compareTo)
-{
-    size_t i = 0;
+inline int __isalnum (int ch);
 
-    while (((char*) memory)[i] != (char) compareTo) {
-        i++;
-    }
+inline int __isalpha (int ch);
 
-    return (void*) &(((char*) memory)[i]);
-}
+#if defined(_BSD_SOURCE) || defined(_SVID_SOURCE) || defined(_XOPEN_SOURCE)
+inline int __isascii (int ch);
+#endif
 
+#if _XOPEN_SOURCE >= 600 || defined(_ISOC99_SOURCE)
+inline int __isblank (int ch);
+#endif
+
+inline int __iscntrl (int ch);
+
+inline int __isdigit (int ch);
+
+inline int __isgraph (int ch);
+
+inline int __islower (int ch);
+
+inline int __isprint (int ch);
+
+inline int __ispunct (int ch);
+
+inline int __isspace (int ch);
+
+inline int __isupper (int ch);
+
+inline int __isxdigit (int ch);
+
+inline int __toascii (int ch);
+
+inline int __tolower (int ch);
+
+inline int __toupper (int ch);
+
+#endif

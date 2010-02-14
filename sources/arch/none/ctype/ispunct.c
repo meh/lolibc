@@ -19,19 +19,14 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#define _GNU_SOURCE 1
+#include <arch/ctype.h>
 
-#include <arch/string.h>
-
-void*
-__rawmemchr (const void* memory, int compareTo)
+int
+__ispunct (int ch)
 {
-    size_t i = 0;
-
-    while (((char*) memory)[i] != (char) compareTo) {
-        i++;
-    }
-
-    return (void*) &(((char*) memory)[i]);
+    return    (ch >= 0x21 && ch <= 0x2F)
+           || (ch >= 0x3A && ch <= 0x40)
+           || (ch >= 0x5B && ch <= 0x60)
+           || (ch >= 0x7B && ch <= 0x7E);
 }
 
