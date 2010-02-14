@@ -19,33 +19,19 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_STDIO_H
-#define _LOLIBC_STDIO_H
+#ifndef _LOLIBC_PRIVATE_STDIO_H
+#define _LOLIBC_PRIVATE_STDIO_H
 
-typedef struct FILE FILE;
-
-extern FILE* __stdin;
-extern FILE* __stdout;
-extern FILE* __stderr;
-
-/* C89 and C99 say they're macros. Make them happy. */
-#define stdin __stdin
-#define stdout __stdout
-#define stderr __stderr
-
-#include <stddef.h>
-#include <stdarg.h>
-
-#define EOF -1
-
-PUBLIC int printf (const char* format, ...);
-
-PUBLIC int fprintf (FILE* stream, const char* format, ...);
-
-PUBLIC int sprintf (char* string, const char* format, ...);
-
-#if defined(_BSD_SOURCE) || _XOPEN_SOURCE >= 500 || defined(_ISOC99_SOURCE)
-PUBLIC int snprintf (char* string, size_t limit, const char* format, ...);
-#endif
+typedef struct __FILE {
+    int             level;  /* fill/empty level of buffer */
+    unsigned        flags;  /* File status flags          */
+    char            fd;     /* File descriptor            */
+    unsigned char   hold;   /* Ungetc char if no buffer   */
+    int             bsize;  /* Buffer size                */
+    unsigned char*  buffer; /* Data transfer buffer       */
+    unsigned char*  curp;   /* Current active pointer     */
+    unsigned        istemp; /* Temporary file indicator   */
+    short           token;  /* Used for validity checking */
+} __FILE;   
 
 #endif

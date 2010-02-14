@@ -1,7 +1,7 @@
 /****************************************************************************
 * lolibc, a C library.                                                      *
 *                                                                           *
-* Copyright (C) 2009  meh. [http://meh.doesntexist.org]                     *
+* Copyright (C) 2010  meh. [http://meh.doesntexist.org]                     *
 *                                                                           *
 * This file is part of lolibc.                                              *
 *                                                                           *
@@ -19,33 +19,33 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_STDIO_H
-#define _LOLIBC_STDIO_H
+#define _BSD_SOURCE
+#define _GNU_SOURCE
 
-typedef struct FILE FILE;
-
-extern FILE* __stdin;
-extern FILE* __stdout;
-extern FILE* __stderr;
-
-/* C89 and C99 say they're macros. Make them happy. */
-#define stdin __stdin
-#define stdout __stdout
-#define stderr __stderr
-
-#include <stddef.h>
 #include <stdarg.h>
+#include <arch/stdarg.h>
 
-#define EOF -1
+int
+vprintf (const char* format, va_list arguments)
+{
+    return __vprintf(format, arguments);
+}
 
-PUBLIC int printf (const char* format, ...);
+int
+vfprintf (FILE* stream, const char* format, va_list arguments)
+{
+    return __vfprintf(stream, format, arguments);
+}
 
-PUBLIC int fprintf (FILE* stream, const char* format, ...);
+int
+vsprintf (char* string, const char* format, va_list arguments)
+{
+    return __vsprintf(string, format, arguments);
+}
 
-PUBLIC int sprintf (char* string, const char* format, ...);
+int
+vsnprintf (char* string, size_t limit, const char* format, va_list arguments)
+{
+    return __vsnprintf(string, limit, format, arguments);
+}
 
-#if defined(_BSD_SOURCE) || _XOPEN_SOURCE >= 500 || defined(_ISOC99_SOURCE)
-PUBLIC int snprintf (char* string, size_t limit, const char* format, ...);
-#endif
-
-#endif

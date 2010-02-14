@@ -23,6 +23,7 @@
 #define _LOLIBC_STDARG_H
 
 #include <stddef.h>
+#include <stdio.h>
 
 typedef struct va_list {
     long* address;
@@ -35,5 +36,15 @@ typedef struct va_list {
 #define va_end(arg) (arg.address = NULL)
 
 #define va_arg(arg, type) (* (((type*) (arg.address = (long*) ((type*) arg.address) + 1)) - 1))
+
+PUBLIC int vprintf (const char* format, va_list arguments);
+
+PUBLIC int vfprintf (FILE* stream, const char* format, va_list arguments);
+
+PUBLIC int vsprintf (char* string, const char* format, va_list arguments);
+
+#if defined(_BSD_SOURCE) || _XOPEN_SOURCE >= 500 || defined(_ISOC99_SOURCE)
+PUBLIC int vsnprintf (char* string, size_t limit, const char* format, va_list arguments);
+#endif
 
 #endif

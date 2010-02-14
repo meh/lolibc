@@ -19,33 +19,18 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_STDIO_H
-#define _LOLIBC_STDIO_H
+#define _BSD_SOURCE
 
-typedef struct FILE FILE;
+#include <arch/stdio.h>
+#include <arch/stdarg.h>
 
-extern FILE* __stdin;
-extern FILE* __stdout;
-extern FILE* __stderr;
+int
+__snprintf (char* string, size_t limit, const char* format, ...)
+{
+    va_list arguments;
 
-/* C89 and C99 say they're macros. Make them happy. */
-#define stdin __stdin
-#define stdout __stdout
-#define stderr __stderr
+    va_start(arguments, format);
 
-#include <stddef.h>
-#include <stdarg.h>
+    return __vsnprintf(string, limit, format, arguments);
+}
 
-#define EOF -1
-
-PUBLIC int printf (const char* format, ...);
-
-PUBLIC int fprintf (FILE* stream, const char* format, ...);
-
-PUBLIC int sprintf (char* string, const char* format, ...);
-
-#if defined(_BSD_SOURCE) || _XOPEN_SOURCE >= 500 || defined(_ISOC99_SOURCE)
-PUBLIC int snprintf (char* string, size_t limit, const char* format, ...);
-#endif
-
-#endif
