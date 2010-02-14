@@ -7,8 +7,14 @@ RELEASE = '0.0.1'
 CC = 'clang'
 AR = 'ar'
 
-CFLAGS  = '-Wall -Wextra -Winline -Wno-long-long -nostdlib -nodefaultlibs -fno-builtin -finline-functions -I./include'
-LDFLAGS = '-s'
+CFLAGS   = '-Wall -Wextra -Winline -Wno-long-long -I./include'
+LDFLAGS  = '-s'
+
+if !ARGV.include?('test')
+    CFLAGS << ' -nostdlib -nodefaultlibs -fno-builtin -finline-functions'
+else
+    CFLAGS << ' -nostdlib -fno-builtin'
+end
 
 CLEAN.include('sources/**/*.o', 'include/features.h')
 CLOBBER.include('*.so', '*.a')
@@ -106,7 +112,7 @@ task :test do
     tests = FileList['test/**/*.c']
 
     tests.each {|test|
-        pipe   = IO.popen("#{CC} #{CFLAGS} -L./ -llolibc -o test/test #{test} 2>&1");
+        pipe   = IO.popen("#{CC} #{CFLAGS} -L. -llolibc -o test/test #{test} 2>&1");
         output = pipe.read.chomp
         pipe.close
 

@@ -19,23 +19,11 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_STDIO_H
-#define _LOLIBC_STDIO_H
+#include <stdio.h>
 
-#include <stddef.h>
-#include <stdarg.h>
+int
+printf (const char* format, ...)
+{
+    return 42;
+}
 
-#define EOF -1
-
-
-PUBLIC int printf (const char* format, ...);
-
-#if 0
-PUBLIC int fprintf (FILE* stream, const char* format, ...);
-
-PUBLIC int sprintf (char* string, const char* format, ...);
-
-PUBLIC int snprintf (char* string, size_t limit, const char* format, ...);
-#endif
-
-#endif

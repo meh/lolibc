@@ -19,23 +19,14 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_STDIO_H
-#define _LOLIBC_STDIO_H
-
 #include <stddef.h>
-#include <stdarg.h>
 
-#define EOF -1
+extern int main (int argc, char** argv, char** envp);
 
+PUBLIC
+int
+_start (int argc, char** argv, char** envp)
+{
+    main(argc, argv, envp);
+}
 
-PUBLIC int printf (const char* format, ...);
-
-#if 0
-PUBLIC int fprintf (FILE* stream, const char* format, ...);
-
-PUBLIC int sprintf (char* string, const char* format, ...);
-
-PUBLIC int snprintf (char* string, size_t limit, const char* format, ...);
-#endif
-
-#endif

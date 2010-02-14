@@ -1,8 +1,6 @@
-#if 0
-Expected result: <<
+/* Expected result: <<
 3
->>
-#endif
+>>*/
 
 #include <stdio.h>
 #include <string.h>
@@ -10,7 +8,7 @@ Expected result: <<
 int
 main (void)
 {
-    printf("%lu\n", strlen("lol"));
+    printf("%u\n", strlen("lol"));
 
     return 0;
 }
