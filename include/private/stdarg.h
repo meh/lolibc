@@ -45,33 +45,42 @@ enum __lolibc_stdarg_Type {
     Error, /* m (GNU extension) */
 };
 
+size_t __lolibc_stdarg_convert (const char* format, void* argument, char* buffer);
+
+/**
+ * Get the placeholder length.
+ *
+ * @param   format  The format string starting with %
+ *
+ * @return  The length of the placeholder.
+ */
 size_t __lolibc_stdarg_placeholder_length (const char* format);
 
-size_t __lolibc_stdarg_max_length (const char* format, va_list arguments);
+size_t __lolibc_stdarg_length (const char* format, va_list arguments);
 
 size_t __lolibc_stdarg_length_single (const char* format, void* argument);
 
-inline size_t __lolibc_stdarg_length_Decimal (void);
+size_t __lolibc_stdarg_length_Decimal (void);
 
-inline size_t __lolibc_stdarg_length_DecimalUnsigned (void);
+size_t __lolibc_stdarg_length_DecimalUnsigned (void);
 
-inline size_t __lolibc_stdarg_length_Octal (void);
+size_t __lolibc_stdarg_length_Octal (void);
 
-inline size_t __lolibc_stdarg_length_Hexadecimal (void);
+size_t __lolibc_stdarg_length_Hexadecimal (void);
 
-inline size_t __lolibc_stdarg_length_DoubleExponent (void);
+size_t __lolibc_stdarg_length_DoubleExponent (void);
 
-inline size_t __lolibc_stdarg_length_Double (void);
+size_t __lolibc_stdarg_length_Double (void);
 
-inline size_t __lolibc_stdarg_length_DoubleShorter (void);
+size_t __lolibc_stdarg_length_DoubleShorter (void);
 
-inline size_t __lolibc_stdarg_length_Char (void);
+size_t __lolibc_stdarg_length_Char (void);
 
-inline size_t __lolibc_stdarg_length_CharWide (void);
+size_t __lolibc_stdarg_length_CharWide (void);
 
-inline size_t __lolibc_stdarg_length_Pointer (void);
+size_t __lolibc_stdarg_length_Pointer (void);
 
-inline size_t __lolibc_stdarg_length_Printed (void);
+size_t __lolibc_stdarg_length_Printed (void);
 
 size_t __lolibc_stdarg_max_length (const char* format);
 

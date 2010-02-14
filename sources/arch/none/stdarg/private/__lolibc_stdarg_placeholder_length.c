@@ -19,19 +19,18 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_ARCH_STDARG_H
-#define _LOLIBC_ARCH_STDARG_H
+#include <arch/stdarg.h>
+#include <private/stdarg.h>
 
-#include <stdarg.h>
+size_t
+__lolibc_stdarg_placeholder_length (const char* format)
+{
+    size_t length = 0;
 
-inline int __vprintf (const char* format, va_list arguments);
+    while (format[length] != '\0') {
+        length++;
+    }
 
-inline int __vfprintf (FILE* stream, const char* format, va_list arguments);
+    return 0;
+}
 
-inline int __vsprintf (char* string, const char* format, va_list arguments);
-
-#if defined(_BSD_SOURCE) || _XOPEN_SOURCE >= 500 || defined(_ISOC99_SOURCE)
-inline int __vsnprintf (char* string, size_t limit, const char* format, va_list arguments);
-#endif
-
-#endif

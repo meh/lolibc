@@ -40,11 +40,11 @@ __vfprintf (FILE* stream, const char* format, va_list arguments)
         if (format[i] == '%') {
             write(file->fd, tmp, tmpLength);
 
-            argument = va_args(arguments, void*);
+            argument = va_arg(arguments, void*);
             length   = __lolibc_stdarg_length_single(&format[i], argument);
 
             char buffer[length+1];
-            printed += __lolibc_stdarg_convert(&format[i], va_args(arguments, void*), buffer);
+            printed += __lolibc_stdarg_convert(&format[i], argument, buffer);
 
             i += __lolibc_stdarg_placeholder_length(&format[i]);
 

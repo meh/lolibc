@@ -27,6 +27,10 @@ __lolibc_stdarg_max_length (const char* format)
 {
     size_t length = 0;
 
+    while (format[length] != '\0') {
+        length++;
+    }
+
     return length;
 }
 

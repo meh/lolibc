@@ -1,7 +1,7 @@
 /****************************************************************************
 * lolibc, a C library.                                                      *
 *                                                                           *
-* Copyright (C) 2010  meh. [http://meh.doesntexist.org]                     *
+* Copyright (C) 2009  meh. [http://meh.doesntexist.org]                     *
 *                                                                           *
 * This file is part of lolibc.                                              *
 *                                                                           *
@@ -19,19 +19,8 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_ARCH_STDARG_H
-#define _LOLIBC_ARCH_STDARG_H
+#include <private/stdio.h>
 
-#include <stdarg.h>
-
-inline int __vprintf (const char* format, va_list arguments);
-
-inline int __vfprintf (FILE* stream, const char* format, va_list arguments);
-
-inline int __vsprintf (char* string, const char* format, va_list arguments);
-
-#if defined(_BSD_SOURCE) || _XOPEN_SOURCE >= 500 || defined(_ISOC99_SOURCE)
-inline int __vsnprintf (char* string, size_t limit, const char* format, va_list arguments);
-#endif
-
-#endif
+__FILE __stdin  = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+__FILE __stdout = { 0, 0, 1, 0, 0, 0, 0, 0, 0 };
+__FILE __stderr = { 0, 0, 2, 0, 0, 0, 0, 0, 0 };
