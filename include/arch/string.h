@@ -66,6 +66,20 @@ inline size_t __strspn (const char* string, const char* accept);
 
 inline size_t __strcspn (const char* string, const char* reject);
 
+inline char* __strdup (const char* string);
+
+#ifdef _GNU_SOURCE
+inline char* __strndup (const char* string, size_t limit);
+
+/* I refuse to implement alloca, it's pure faggotry.
+
+inline char* __strdupa (const char* string);
+
+inline char* __strndupa (const char* string, size_t limit);
+
+*/
+#endif
+
 inline size_t __strlen (const char* string);
 
 #endif
