@@ -19,7 +19,6 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <string.h>
 #include <arch/string.h>
 
 size_t
@@ -36,69 +35,5 @@ __strlen (const char* s)
     }
 
     return length;
-}
-
-char*
-__strcat (char* dest, const char* src)
-{
-    if (!dest || !src) {
-        return NULL;
-    }
-
-    size_t i = __strlen(dest);
-    size_t h = 0;
-
-    while (src[h] != '\0') {
-        dest[i] = src[h];
-        i++; h++;
-    }
-
-    dest[i] = '\0';
-
-    return dest;
-}
-
-char*
-__strncat (char* dest, const char* src, size_t n)
-{
-    if (!dest || !src || !n) {
-        return NULL;
-    }
-
-    size_t i = __strlen(dest);
-    size_t h = 0;
-
-    while (src[h] != '\0' && h < n) {
-        dest[i] = src[h];
-        i++; h++;
-    }
-
-    dest[i] = '\0';
-
-    return dest;
-}
-
-void*
-__memcpy (void* dest, const void* src, size_t n)
-{
-    size_t i;
-    
-    for (i = 0; i < n; i++) {
-        ((char*) dest)[i] = ((char*) src)[i];
-    }
-
-    return dest;
-}
-
-void*
-__memset (void* s, int c, size_t n)
-{
-    size_t i;
-
-    for (i = 0; i < n; i++) {
-        ((char*) s)[i] = (char) c;
-    }
-
-    return s;
 }
 

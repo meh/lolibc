@@ -18,14 +18,28 @@ SOURCES = FileList['sources/*.c']
 case ENV['ARCH']
     when 'x86'
         ENV['32bit'] = 'true'
+    when 'x86_64'
+        ENV['64bit'] = 'true'
     else
         ENV['ARCH'] = 'none'
 end
 
-SOURCES.include("sources/arch/#{ENV['ARCH']}/**.c")
+SOURCES.include("sources/arch/#{ENV['ARCH']}/**/*.c")
+
+if ENV['ARCH'] != 'none'
+    fallbacks = FileList['sources/arch/none/**/*.c']
+
+    SOURCES.each {|file|
+        fallbacks.exclude(File.basename(file))
+    }
+
+    SOURCES.include(fallbacks)
+end
 
 if ENV['32bit']
     CFLAGS << ' -m32'
+elsif ENV['64bit']
+    CFLAGS << ' -m64'
 end
 
 if ENV['OPTIMIZED'] != 'false'
