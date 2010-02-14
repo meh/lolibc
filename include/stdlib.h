@@ -19,5 +19,11 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
+#ifndef _LOLIBC_STDLIB_H
+#define _LOLIBC_STDLIB_H
+
 #include <stddef.h>
 
+PUBLIC void* malloc (size_t size);
+
+#endif

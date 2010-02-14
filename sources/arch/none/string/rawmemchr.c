@@ -19,42 +19,19 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_ARCH_STRING_H
-#define _LOLIBC_ARCH_STRING_H
+#define _GNU_SOURCE
 
-#include <string.h>
+#include <arch/string.h>
 
-inline void* __memccpy (void* dest, const void* src, int c, size_t n);
+void*
+__rawmemchr (const void *s, int c)
+{
+    size_t i = 0;
 
-inline void* __memchr (const void *s, int c, size_t n);
+    while (((char*) s)[i] != (char) c) {
+        i++;
+    }
 
-#ifdef _GNU_SOURCE
-inline void* __memrchr (const void *s, int c, size_t n);
+    return &(((char*) s)[i]);
+}
 
-inline void* __rawmemchr (const void *s, int c);
-#endif
-
-inline int __memcmp (const void *s1, const void *s2, size_t n);
-
-inline void* __memcpy (void* dest, const void* src, size_t n);
-
-inline void* __memmove (void *dest, const void *src, size_t n);
-
-inline void* __memset (void* s, int c, size_t n);
-
-inline char* __strcat (char* dest, const char* src);
-
-inline char* __strncat (char* dest, const char* src, size_t n);
-
-inline char* __strchr (const char *s, int c);
-
-inline char* __strrchr (const char *s, int c);
-
-#ifdef _GNU_SOURCE
-inline char* __strchrnul (const char *s, int c);
-#endif
-
-inline size_t __strlen (const char* s);
-
-
-#endif

@@ -24,10 +24,6 @@
 char*
 __strcat (char* dest, const char* src)
 {
-    if (!dest || !src) {
-        return NULL;
-    }
-
     size_t i = __strlen(dest);
     size_t h = 0;
 

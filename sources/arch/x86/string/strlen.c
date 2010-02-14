@@ -24,20 +24,17 @@
 size_t
 __strlen (const char* s)
 {
-    if (!s) {
-        return 0;
-    }
-
     size_t length;
 
     asm volatile (
-        "movl $0, %%ecx \n"
+        "movl %1, %%ecx \n"
         "cld \n"
         "repne scasb \n"
         "notl %%ecx \n"
         "decl %%ecx \n"
         "movl %%ecx, %0"
-        : "=a" (length)
+        : "=a" (length) : "a" (s)
+        : "%eax", "%ecx", "%esi", "%edi"
     );
 
     return length;

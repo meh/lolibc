@@ -24,10 +24,6 @@
 size_t
 __strlen (const char* s)
 {
-    if (!s) {
-        return 0;
-    }
-
     size_t length = 0;
 
     while (s[length] != '\0') {

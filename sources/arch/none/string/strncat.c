@@ -24,7 +24,7 @@
 char*
 __strncat (char* dest, const char* src, size_t n)
 {
-    if (!dest || !src || !n) {
+    if (n == 0) {
         return NULL;
     }
 
