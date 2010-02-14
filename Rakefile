@@ -35,48 +35,55 @@ case ENV['ARCH']
         CFLAGS << ' -D_ARCH_X86'
         ENV['32bit'] = 'true'
 
+        if !defined? ENV['SPECIFIC']
+            ENV['SPECIFIC'] = 'i386'
+        end
+
     when 'x86_64'
         CFLAGS << ' -D_ARCH_X86_64'
         ENV['64bit'] = 'true'
+
+        ENV['SPECIFIC'] = '.'
 
     else
         ENV['ARCH']     = 'none'
         ENV['SPECIFIC'] = '.'
 end
 
-
 SOURCES.include("sources/arch/#{ENV['ARCH']}/#{ENV['SPECIFIC']}/**/*.c")
 
 if ENV['ARCH'] != 'none'
-    drop = false
-    archs = FileList["sources/arch/#{ENV['ARCH']}/*"]
+    if ENV['ARCH'] == 'x86'
+        drop = false
+        archs = FileList["sources/arch/#{ENV['ARCH']}/*"]
 
-    if archs.grep(/#{ENV['SPECIFIC']}/).empty?
-        archs.include("sources/arch/#{ENV['ARCH']}/#{ENV['SPECIFIC']}")
-    end
-    
-    archs = archs.sort.select {|arch|
-        if drop
-            false
-        else
-            if File.basename(arch) == ENV['SPECIFIC']
-                drop = true
-                false
-            end
-
-            true
+        if archs.grep(/#{ENV['SPECIFIC']}/).empty?
+            archs.include("sources/arch/#{ENV['ARCH']}/#{ENV['SPECIFIC']}")
         end
-    }
+    
+        archs = archs.sort.select {|arch|
+            if drop
+                false
+            else
+                if File.basename(arch) == ENV['SPECIFIC']
+                    drop = true
+                    false
+                end
 
-    archs.reverse.each {|file|
-        fallbacks = FileList["sources/arch/#{ENV['ARCH']}/#{File.basename(file)}/**/**.c"]
-
-        SOURCES.each {|file|
-            fallbacks.exclude(File.basename(file))
+                true
+            end
         }
 
-        SOURCES.include(fallbacks)
-    }
+        archs.reverse.each {|file|
+            fallbacks = FileList["sources/arch/#{ENV['ARCH']}/#{File.basename(file)}/**/**.c"]
+
+            SOURCES.each {|file|
+                fallbacks.exclude(File.basename(file))
+            }
+
+            SOURCES.include(fallbacks)
+        }
+    end
 
     fallbacks = FileList['sources/arch/none/**/*.c']
 
