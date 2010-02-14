@@ -26,5 +26,7 @@
 
 inline ssize_t __write (int fd, const void* buffer, size_t bytes);
 
+inline void __exit (int status);
+
 #endif
 

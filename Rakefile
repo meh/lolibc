@@ -112,7 +112,7 @@ task :test do
     tests = FileList['test/**/*.c']
 
     tests.each {|test|
-        pipe   = IO.popen("#{CC} #{CFLAGS} -L. -llolibc -o test/test #{test} 2>&1");
+        pipe   = IO.popen("#{CC} #{CFLAGS} -o test/test #{test} -L. -static -llolibc 2>&1");
         output = pipe.read.chomp
         pipe.close
 
@@ -128,10 +128,16 @@ task :test do
         output = pipe.read.chomp
         pipe.close
 
+
         if $? != 0 || output != result
-            puts "test/#{test} failed:"
-            puts "Expected output: #{result}"
-            puts "Received output: #{output}\n\n"
+            if $?.signaled?
+                code = $?.inspect.match(/signaled\((.*?)=/)[1]
+            else
+                code = $?.to_i
+            end
+
+            puts "test/#{test} failed (#{code}) ({} = expected; [] = received):"
+            puts "{#{result}} [#{output}]\n\n"
         else
             puts "test/#{test} passed."
         end

@@ -20,11 +20,20 @@
 ****************************************************************************/
 
 #include <stdlib.h>
+#include <unistd.h>
+
 #include <arch/stdlib.h>
 
 void*
 malloc (size_t size)
 {
     return __malloc(size);
+}
+
+// TODO: Kinda everything, just need something fast for now.
+void
+exit (int status)
+{
+    _exit(status & 0377);
 }
 

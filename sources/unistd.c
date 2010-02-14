@@ -28,3 +28,9 @@ write (int fd, const void* buffer, size_t bytes)
     return __write(fd, buffer, bytes);
 }
 
+void
+_exit (int status)
+{
+    __exit(status);
+}
+

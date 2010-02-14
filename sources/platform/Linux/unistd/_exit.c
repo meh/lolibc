@@ -19,15 +19,17 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <stddef.h>
-#include <stdlib.h>
+#include <platform/unistd.h>
+#include <linux/unistd.h>
 
-extern int main (int argc, char** argv, char** envp);
-
-PUBLIC
 void
-_start (int argc, char** argv, char** envp)
+__exit (int status)
 {
-    exit(main(argc, argv, envp));
+    asm volatile (
+        "int $0x80"
+        :
+        : "a" (__NR_exit), "b" (status)
+        : "%eax", "%ebx"
+    );
 }
 
