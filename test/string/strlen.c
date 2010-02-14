@@ -8,7 +8,7 @@
 int
 main (void)
 {
-    printf("%u\n", strlen("lol"));
+    strlen("lol");
 
     return 0;
 }

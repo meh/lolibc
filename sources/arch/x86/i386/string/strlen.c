@@ -28,14 +28,13 @@ __strlen (const char* string)
 
     asm volatile (
         "cld \n"
-        "repne scasb \n"
-        "notl %%ecx \n"
-        "decl %%ecx \n"
-        "movl %%ecx, %0"
-        : "=c" (length) : "c" (string)
+        "repnz \n"
+        "scasb \n"
+        : "=c" (length)
+        : "D" (string), "c" (-1)
         : "%ecx", "%esi", "%edi"
     );
 
-    return length;
+    return (-length) - 2;
 }
 

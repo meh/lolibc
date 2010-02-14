@@ -21,20 +21,63 @@ CLOBBER.include('*.so', '*.a')
 
 SOURCES = FileList['sources/*.c']
 
+if ENV['ARCH']
+    specific = ENV['ARCH'].match(/^(.*?)\/(.*?)$/)
+
+    if specific
+        ENV['ARCH']     = specific[1]
+        ENV['SPECIFIC'] = specific[2]
+    end
+end
+
 case ENV['ARCH']
     when 'x86'
         CFLAGS << ' -D_ARCH_X86'
         ENV['32bit'] = 'true'
+
     when 'x86_64'
         CFLAGS << ' -D_ARCH_X86_64'
         ENV['64bit'] = 'true'
+
     else
-        ENV['ARCH'] = 'none'
+        ENV['ARCH']     = 'none'
+        ENV['SPECIFIC'] = '.'
 end
 
-SOURCES.include("sources/arch/#{ENV['ARCH']}/**/*.c")
+
+SOURCES.include("sources/arch/#{ENV['ARCH']}/#{ENV['SPECIFIC']}/**/*.c")
 
 if ENV['ARCH'] != 'none'
+    drop = false
+    archs = FileList["sources/arch/#{ENV['ARCH']}/*"]
+
+    if archs.grep(/#{ENV['SPECIFIC']}/).empty?
+        archs.include("sources/arch/#{ENV['ARCH']}/#{ENV['SPECIFIC']}")
+    end
+    
+    archs = archs.sort.select {|arch|
+        if drop
+            false
+        else
+            if File.basename(arch) == ENV['SPECIFIC']
+                drop = true
+                false
+            end
+
+            true
+        end
+    }
+
+    archs.reverse.each {|file|
+        fallbacks = FileList["sources/arch/#{ENV['ARCH']}/#{File.basename(file)}/**/**.c"]
+
+        SOURCES.each {|file|
+            fallbacks.exclude(File.basename(file))
+        }
+
+        SOURCES.include(fallbacks)
+    }
+
     fallbacks = FileList['sources/arch/none/**/*.c']
 
     SOURCES.each {|file|
@@ -136,10 +179,10 @@ task :test do
                 code = $?.to_i
             end
 
-            puts "test/#{test} failed (#{code}) ({} = expected; [] = received):"
+            puts "#{test} failed (#{code}) ({} = expected; [] = received):"
             puts "{#{result}} [#{output}]\n\n"
         else
-            puts "test/#{test} passed."
+            puts "#{test} passed."
         end
     }
 
