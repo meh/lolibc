@@ -22,6 +22,81 @@
 #ifndef _LOLIBC_PRIVATE_STDARG_H
 #define _LOLIBC_PRIVATE_STDARG_H
 
+enum __lolibc_stdarg_Type {
+    Decimal, /* d, i */
+    DecimalUnsigned, /* u */
+    Octal, /* o */
+    Hexadecimal, /* x */
+    HexadecimalCAPS, /* X */
+    DoubleExponent, /* e */
+    DoubleExponentCAPS, /* E */
+    Double, /* f */
+    DoubleCAPS, /* F */
+    DoubleShorter, /* g */
+    DoubleShorterCAPS, /* G */
+    Char, /* c */
+    CharWide, /* lc (C deprecated) */
+    String, /* s */
+    StringWide, /* ls (S deprecated) */
+    Pointer, /* p */
+    Printed, /* n */
+    Percent, /* % */
+
+    Error, /* m (GNU extension) */
+};
+
+size_t __lolibc_stdarg_placeholder_length (const char* format);
+
+size_t __lolibc_stdarg_max_length (const char* format, va_list arguments);
+
+size_t __lolibc_stdarg_length_single (const char* format, void* argument);
+
+inline size_t __lolibc_stdarg_length_Decimal (void);
+
+inline size_t __lolibc_stdarg_length_DecimalUnsigned (void);
+
+inline size_t __lolibc_stdarg_length_Octal (void);
+
+inline size_t __lolibc_stdarg_length_Hexadecimal (void);
+
+inline size_t __lolibc_stdarg_length_DoubleExponent (void);
+
+inline size_t __lolibc_stdarg_length_Double (void);
+
+inline size_t __lolibc_stdarg_length_DoubleShorter (void);
+
+inline size_t __lolibc_stdarg_length_Char (void);
+
+inline size_t __lolibc_stdarg_length_CharWide (void);
+
+inline size_t __lolibc_stdarg_length_Pointer (void);
+
+inline size_t __lolibc_stdarg_length_Printed (void);
+
 size_t __lolibc_stdarg_max_length (const char* format);
+
+size_t __lolibc_stdarg_max_length_single (const char* format);
+
+inline size_t __lolibc_stdarg_max_length_Decimal (void);
+
+inline size_t __lolibc_stdarg_max_length_DecimalUnsigned (void);
+
+inline size_t __lolibc_stdarg_max_length_Octal (void);
+
+inline size_t __lolibc_stdarg_max_length_Hexadecimal (void);
+
+inline size_t __lolibc_stdarg_max_length_DoubleExponent (void);
+
+inline size_t __lolibc_stdarg_max_length_Double (void);
+
+inline size_t __lolibc_stdarg_max_length_DoubleShorter (void);
+
+inline size_t __lolibc_stdarg_max_length_Char (void);
+
+inline size_t __lolibc_stdarg_max_length_CharWide (void);
+
+inline size_t __lolibc_stdarg_max_length_Pointer (void);
+
+inline size_t __lolibc_stdarg_max_length_Printed (void);
 
 #endif

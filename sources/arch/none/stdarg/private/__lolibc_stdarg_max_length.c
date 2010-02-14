@@ -25,6 +25,8 @@
 size_t
 __lolibc_stdarg_max_length (const char* format)
 {
+    size_t length = 0;
 
+    return length;
 }
 
