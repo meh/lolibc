@@ -21,6 +21,9 @@
 
 #define _GNU_SOURCE
 
+#include <errno.h>
+#include <stdlib.h>
+
 #include <arch/string.h>
 
 char*
@@ -29,7 +32,12 @@ __strndup (const char* string, size_t limit)
     size_t length = strlen(string);
     size_t i;
 
-    char* dupe = malloc(((length > limit ? length : limit) + 1) * sizeof(char));
+    char* dupe = (char*) malloc(((length > limit ? length : limit) + 1) * sizeof(char));
+
+    if (dupe == NULL) {
+        errno = ENOMEM;
+        return NULL;
+    }
 
     for (i = 0; i < limit && i < length; i++) {
         dupe[i] = string[i];

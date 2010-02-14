@@ -20,6 +20,7 @@
 ****************************************************************************/
 
 #include <errno.h>
+#include <stdlib.h>
 
 #include <arch/string.h>
 
@@ -29,7 +30,7 @@ __strdup (const char* string)
     size_t length = strlen(string);
     size_t i;
 
-    char* dupe = malloc((length + 1) * sizeof(char));
+    char* dupe = (char*) malloc((length + 1) * sizeof(char));
 
     if (dupe == NULL) {
         errno = ENOMEM;
