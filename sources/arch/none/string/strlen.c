@@ -22,11 +22,11 @@
 #include <arch/string.h>
 
 size_t
-__strlen (const char* s)
+__strlen (const char* string)
 {
     size_t length = 0;
 
-    while (s[length] != '\0') {
+    while (string[length] != '\0') {
         length++;
     }
 

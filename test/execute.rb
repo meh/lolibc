@@ -1,16 +1,16 @@
 #! /usr/bin/env ruby
 
 tests = [
-    { "file" => "string.c", "result" => "3" }
+    { :file => "strlen.c", :result => "3" }
 ];
 
 tests.each {|test|
-    pipe   = IO.popen("clang -I../include -o test/test test/#{test['file']}");
+    pipe   = IO.popen("clang -I../include -o test/test test/#{test[:file]} 2>&1");
     output = pipe.read.chomp
     pipe.close
 
     if (!output.empty?)
-        puts "test/#{test['file']} failed to compile:\n"
+        puts "test/#{test[:file]} failed to compile:\n"
         puts "#{output}\n"
     end
 
@@ -18,12 +18,12 @@ tests.each {|test|
     output = pipe.read.chomp
     pipe.close
 
-    if $? != 0 || output != test['result']
-        puts "test/#{test['file']} failed:"
-        puts "Expected output: #{test['result']}"
+    if $? != 0 || output != test[:result]
+        puts "test/#{test[:file]} failed:"
+        puts "Expected output: #{test[:result]}"
         puts "Received output: #{output}\n\n"
     else
-        puts "test/#{test['file']} passed."
+        puts "test/#{test[:file]} passed."
     end
 }
 

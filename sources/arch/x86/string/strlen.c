@@ -22,7 +22,7 @@
 #include <arch/string.h>
 
 size_t
-__strlen (const char* s)
+__strlen (const char* string)
 {
     size_t length;
 
@@ -33,7 +33,7 @@ __strlen (const char* s)
         "notl %%ecx \n"
         "decl %%ecx \n"
         "movl %%ecx, %0"
-        : "=a" (length) : "a" (s)
+        : "=a" (length) : "a" (string)
         : "%eax", "%ecx", "%esi", "%edi"
     );
 
