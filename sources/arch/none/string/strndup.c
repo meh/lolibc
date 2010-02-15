@@ -48,4 +48,4 @@ __strndup (const char* string, size_t limit)
     return dupe;
 }
 
-alias(__strndup, strndup);
+alias(__strndup, strndup, weak);

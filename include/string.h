@@ -65,13 +65,13 @@ PUBLIC char* strdup (const char* string);
 #if defined(_GNU_SOURCE)
 PUBLIC char* strndup (const char* string, size_t limit);
 
-#if 0
+/*
 I refuse to implement alloca, it's pure faggotry.
 
 PUBLIC char* strdupa (const char* string);
 
 PUBLIC char* strndupa (const char* string, size_t limit);
-#endif
+*/
 #endif
 
 PUBLIC size_t strlen (const char* string);

@@ -27,4 +27,4 @@ __isxdigit (int ch)
     return (ch >= 0x30 && ch <= 0x39) || (ch >= 0x41 && ch <= 0x46) || (ch >= 0x61 && ch <= 0x66);
 }
 
-alias(__isxdigit, isxdigit);
+alias(__isxdigit, isxdigit, weak);

@@ -27,4 +27,4 @@ __isalnum (int ch)
     return __isalpha(ch) || __isdigit(ch);
 }
 
-alias(__isalnum, isalnum);
+alias(__isalnum, isalnum, weak);

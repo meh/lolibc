@@ -27,4 +27,4 @@ __isupper (int ch)
     return (ch >= 0x41 && ch <= 0x5A);
 }
 
-alias(__isupper, isupper);
+alias(__isupper, isupper, weak);

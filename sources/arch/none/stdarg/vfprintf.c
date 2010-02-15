@@ -58,4 +58,4 @@ __vfprintf (FILE* stream, const char* format, va_list arguments)
     return printed;
 }
 
-alias(__vprintf, vprintf);
+alias(__vfprintf, vfprintf, weak);

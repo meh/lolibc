@@ -28,14 +28,12 @@ __strlen (const char* string)
 
     asm volatile (
         "cld \n"
-        "repnz \n"
-        "scasb \n"
+        "repnz scasb"
         : "=c" (length)
         : "D" (string), "c" (-1)
-        : "%ecx", "%esi", "%edi"
     );
 
     return (-length) - 2;
 }
 
-alias(__strlen, strlen);
+alias(__strlen, strlen, weak);

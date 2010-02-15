@@ -27,4 +27,4 @@ __iscntrl (int ch)
     return (ch >= 0 && ch <= 0x1F);
 }
 
-alias(__iscntrl, iscntrl);
+alias(__iscntrl, iscntrl, weak);

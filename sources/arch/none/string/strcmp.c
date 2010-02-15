@@ -47,4 +47,4 @@ __strcmp (const char *first, const char *second)
     return 0;
 }
 
-alias(__strcmp, strcmp);
+alias(__strcmp, strcmp, weak);

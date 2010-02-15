@@ -41,4 +41,4 @@ __strncat (char* destination, const char* source, size_t limit)
     return destination;
 }
 
-alias(__strncat, strncat);
+alias(__strncat, strncat, weak);

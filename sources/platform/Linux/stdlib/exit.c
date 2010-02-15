@@ -29,4 +29,4 @@ __exit (int status)
     _exit(status & 255);
 }
 
-alias(__exit, exit);
+alias(__exit, exit, weak);

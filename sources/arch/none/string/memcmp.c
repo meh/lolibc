@@ -38,4 +38,4 @@ __memcmp (const void *first, const void *second, size_t limit)
     return 0;
 }
 
-alias(__memcmp, memcmp);
+alias(__memcmp, memcmp, weak);

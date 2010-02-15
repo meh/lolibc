@@ -37,4 +37,4 @@ __strncpy (char* destination, const char* source, size_t limit)
     return destination;
 }
 
-alias(__strncpy, strncpy);
+alias(__strncpy, strncpy, weak);

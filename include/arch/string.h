@@ -65,13 +65,13 @@ PRIVATE char* __strdup (const char* string);
 #if defined(_GNU_SOURCE)
 PRIVATE char* __strndup (const char* string, size_t limit);
 
-#if 0
+/*
 I refuse to implement alloca, it's pure faggotry.
 
 PRIVATE char* __strdupa (const char* string);
 
 PRIVATE char* __strndupa (const char* string, size_t limit);
-#endif
+*/
 #endif
 
 PRIVATE size_t __strlen (const char* string);

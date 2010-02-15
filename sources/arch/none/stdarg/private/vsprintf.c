@@ -1,7 +1,7 @@
 /****************************************************************************
 * lolibc, a C library.                                                      *
 *                                                                           *
-* Copyright (C) 2009  meh. [http://meh.doesntexist.org]                     *
+* Copyright (C) 2010  meh. [http://meh.doesntexist.org]                     *
 *                                                                           *
 * This file is part of lolibc.                                              *
 *                                                                           *
@@ -19,22 +19,15 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <arch/string.h>
+#include <arch/stdarg.h>
 
-char*
-__strcpy (char* destination, const char* source)
+int
+__vsprintf (char* string, const char* format, va_list arguments)
 {
-    size_t i = 0;
+    size_t length = __lolibc_stdarg_length(format, arguments);
+    FILE*  stream = fmemopen(string, length, "w");
 
-    while (source[i] != '\0') {
-        destination[i] = source[i];
-
-        i++;
-    }
-
-    destination[i] = '\0';
-
-    return destination;
+    return vfprintf(stream, format, arguments);
 }
 
-alias(__strcpy, strcpy, weak);
+alias(__vsprintf, vsprintf, weak);

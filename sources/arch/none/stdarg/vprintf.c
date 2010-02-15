@@ -27,4 +27,4 @@ __vprintf (const char* format, va_list arguments)
     return __vfprintf(stdout, format, arguments);
 }
 
-alias(__vprintf, vprintf);
+alias(__vprintf, vprintf, weak);

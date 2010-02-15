@@ -27,4 +27,4 @@ __isdigit (int ch)
     return  (ch >= 0x30 && ch <= 0x39);
 }
 
-alias(__isdigit, isdigit);
+alias(__isdigit, isdigit, weak);

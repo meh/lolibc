@@ -46,4 +46,4 @@ __strdup (const char* string)
     return dupe;
 }
 
-alias(__strdup, strdup);
+alias(__strdup, strdup, weak);

@@ -29,4 +29,4 @@ __isblank (int ch)
     return (ch == ' ' || ch == '\t');
 }
 
-alias(__isblank, isblank);
+alias(__isblank, isblank, weak);

@@ -27,4 +27,4 @@ __isgraph (int ch)
     return (ch >= 0x21 && ch <= 0x7E);
 }
 
-alias(__isgraph, isgraph);
+alias(__isgraph, isgraph, weak);

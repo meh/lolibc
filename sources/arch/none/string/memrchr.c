@@ -37,4 +37,4 @@ __memrchr (const void* memory, int compareTo, size_t bytes)
     return NULL;
 }
 
-alias(__memrchr, memrchr);
+alias(__memrchr, memrchr, weak);

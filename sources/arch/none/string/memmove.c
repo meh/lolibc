@@ -40,4 +40,4 @@ __memmove (void *destination, const void *source, size_t limit)
     return destination;
 }
 
-alias(__memmove, memmove);
+alias(__memmove, memmove, weak);

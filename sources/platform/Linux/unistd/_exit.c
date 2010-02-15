@@ -29,9 +29,8 @@ ___exit (int status)
         "int $0x80"
         :
         : "a" (__NR_exit), "b" (status)
-        : "%eax", "%ebx"
     );
 }
 
-alias(___exit, _exit);
+alias(___exit, _exit, weak);
 alias(___exit, _Exit);

@@ -27,4 +27,4 @@ __isspace (int ch)
     return (ch >= 0x09 && ch <= 0x0D) || ch == 0x20;
 }
 
-alias(__isspace, isspace);
+alias(__isspace, isspace, weak);

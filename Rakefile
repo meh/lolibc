@@ -167,7 +167,7 @@ task :test do
     tests = FileList['test/**/*.c']
 
     tests.each {|test|
-        pipe   = IO.popen("#{CC} #{CFLAGS} -o test/test #{test} -L. -static -llolibc 2>&1");
+        pipe   = IO.popen("#{CC} #{CFLAGS} -o test/test #{test} -L. -llolibc 2>&1");
         output = pipe.read.chomp
         pipe.close
 

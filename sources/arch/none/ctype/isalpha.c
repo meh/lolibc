@@ -27,4 +27,4 @@ __isalpha (int ch)
     return __isupper(ch) || __islower(ch);
 }
 
-alias(__isalpha, isalpha);
+alias(__isalpha, isalpha, weak);

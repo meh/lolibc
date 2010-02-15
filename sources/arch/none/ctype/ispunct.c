@@ -30,4 +30,4 @@ __ispunct (int ch)
            || (ch >= 0x7B && ch <= 0x7E);
 }
 
-alias(__ispunct, ispunct);
+alias(__ispunct, ispunct, weak);

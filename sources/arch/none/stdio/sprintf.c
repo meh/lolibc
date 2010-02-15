@@ -32,4 +32,4 @@ __sprintf (char* string, const char* format, ...)
     return __vsprintf(string, format, arguments);
 }
 
-alias(__sprintf, sprintf);
+alias(__sprintf, sprintf, weak);

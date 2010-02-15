@@ -37,4 +37,4 @@ __fwrite (const void* buffer, size_t size, size_t number, FILE* stream)
     return written;
 }
 
-alias(__fwrite, fwrite);
+alias(__fwrite, fwrite, weak);

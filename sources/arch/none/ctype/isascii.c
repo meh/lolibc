@@ -29,4 +29,4 @@ __isascii (int ch)
     return (ch >= 0x00 && ch <= 0x7F);
 }
 
-alias(__isascii, isascii);
+alias(__isascii, isascii, weak);

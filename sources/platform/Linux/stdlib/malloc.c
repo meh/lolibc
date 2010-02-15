@@ -26,3 +26,5 @@ __malloc (size_t size)
 {
     return NULL;
 }
+
+alias(__malloc, malloc, weak);

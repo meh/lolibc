@@ -31,10 +31,9 @@ __write (int fd, const void* buffer, size_t bytes)
         "int $0x80"
         : "=a" (written)
         : "a" (__NR_write), "b" (fd), "c" (buffer), "d" (bytes)
-        : "%eax", "%ebx", "%ecx", "%edx"
     );
 
     return written;
 }
 
-alias(__write, write);
+alias(__write, write, weak);
