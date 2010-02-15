@@ -19,31 +19,37 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_PRIVATE_STDIO_H
-#define _LOLIBC_PRIVATE_STDIO_H
+#ifndef _LOLIBC_PRIVATE_STDIO_STREAM_H
+#define _LOLIBC_PRIVATE_STDIO_STREAM_H
 
-typedef enum __lolibc_StreamType {
-    StreamFile,
-    StreamString
-} __lolibc_StreamType;
+#include <stddef.h>
+
+typedef ssize_t (*__lolibc_FILE_read) (void* data, char* buffer, size_t size);
+
+typedef ssize_t (*__lolibc_FILE_write) (void* data, const char* buffer, size_t size);
+
+typedef int (*__lolibc_FILE_seek) (void* data, unsigned long position, int whence);
+
+typedef unsigned long (*__lolibc_FILE_tell) (void* data);
+
+typedef int (*__lolibc_FILE_flush) (void* data);
+
+typedef int (*__lolibc_FILE_close) (void* data);
 
 typedef struct __FILE {
-    char                fd;             /* File descriptor            */
+    void* data;  /* the GNU "cookie" */
+    char* type;  /* name of the stream, passed when registering a stream */
 
-    __lolibc_StreamType type;           /* stream type */
-    unsigned            flags;          /* File status flags          */
+    __lolibc_FILE_read  read;
+    __lolibc_FILE_write write;
+    __lolibc_FILE_seek  seek;
+    __lolibc_FILE_tell  tell;
+    __lolibc_FILE_flush flush;
+    __lolibc_FILE_close close;
 
-    int                 level;          /* fill/empty level of buffer */
-    unsigned char       hold;           /* Ungetc char if no buffer   */
-    int                 bufferSize;     /* Buffer size                */
-    unsigned char*      buffer;         /* Data transfer buffer       */
-    unsigned char*      currentPointer; /* Current active pointer     */
-
-    unsigned char       isTemporary;    /* Temporary file indicator   */
-
-    short               magic;          /* Used for validity checking */
+    short magic; /* used for validity checking */
 } __FILE;
 
-int __lolibc_stdio_is_valid_stream (__FILE* stream);
+int __lolibc_FILE_is_valid_stream (__FILE* stream);
 
 #endif

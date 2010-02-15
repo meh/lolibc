@@ -1,7 +1,7 @@
 /****************************************************************************
 * lolibc, a C library.                                                      *
 *                                                                           *
-* Copyright (C) 2009  meh. [http://meh.doesntexist.org]                     *
+* Copyright (C) 2010  meh. [http://meh.doesntexist.org]                     *
 *                                                                           *
 * This file is part of lolibc.                                              *
 *                                                                           *
@@ -19,22 +19,19 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_ARCH_STDIO_H
-#define _LOLIBC_ARCH_STDIO_H
+#define _GNU_SOURCE
 
 #include <stdio.h>
-#include <stddef.h>
 
-PRIVATE size_t __fwrite (const void* buffer, size_t size, size_t number, FILE* stream);
+#include <platform/stdarg.h>
 
-PRIVATE int __printf (const char* format, ...);
+int
+__vsprintf (char* string, const char* format, va_list arguments)
+{
+    size_t length = __lolibc_stdarg_length(format, arguments);
+    FILE*  stream = fmemopen(string, length, "w");
 
-PRIVATE int __fprintf (FILE* stream, const char* format, ...);
+    return vfprintf(stream, format, arguments);
+}
 
-PRIVATE int __sprintf (char* string, const char* format, ...);
-
-#if defined(_BSD_SOURCE) || _XOPEN_SOURCE >= 500 || defined(_ISOC99_SOURCE)
-PRIVATE int __snprintf (char* string, size_t limit, const char* format, ...);
-#endif
-
-#endif
+alias(__vsprintf, vsprintf, weak);

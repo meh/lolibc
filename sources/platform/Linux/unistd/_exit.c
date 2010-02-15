@@ -33,4 +33,4 @@ ___exit (int status)
 }
 
 alias(___exit, _exit, weak);
-alias(___exit, _Exit);
+alias(___exit, _Exit, weak);

@@ -1,7 +1,7 @@
 /****************************************************************************
 * lolibc, a C library.                                                      *
 *                                                                           *
-* Copyright (C) 2009  meh. [http://meh.doesntexist.org]                     *
+* Copyright (C) 2010  meh. [http://meh.doesntexist.org]                     *
 *                                                                           *
 * This file is part of lolibc.                                              *
 *                                                                           *
@@ -19,42 +19,19 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_STDIO_H
-#define _LOLIBC_STDIO_H
+#ifndef _LOLIBC_PLATFORM_STDARG_H
+#define _LOLIBC_PLATFORM_STDARG_H
 
-typedef struct FILE FILE;
-
-extern FILE* __stdin;
-extern FILE* __stdout;
-extern FILE* __stderr;
-
-/* C89 and C99 say they're macros. Make them happy. */
-#define stdin __stdin
-#define stdout __stdout
-#define stderr __stderr
-
-#include <stddef.h>
 #include <stdarg.h>
 
-#define EOF -1
+PRIVATE int __vprintf (const char* format, va_list arguments);
 
-#if defined(_GNU_SOURCE)
-PUBLIC FILE* fmemopen (void* buffer, size_t size, const char* mode);
-#endif
+PRIVATE int __vfprintf (FILE* stream, const char* format, va_list arguments);
 
-PUBLIC size_t fwrite (const void* buffer, size_t size, size_t number, FILE* stream);
-
-PUBLIC int fputs (const char* string, FILE* stream);
-
-PUBLIC int fprintf (FILE* stream, const char* format, ...);
-
-
-PUBLIC int printf (const char* format, ...);
-
-PUBLIC int sprintf (char* string, const char* format, ...);
+PRIVATE int __vsprintf (char* string, const char* format, va_list arguments);
 
 #if defined(_BSD_SOURCE) || _XOPEN_SOURCE >= 500 || defined(_ISOC99_SOURCE)
-PUBLIC int snprintf (char* string, size_t limit, const char* format, ...);
+PRIVATE int __vsnprintf (char* string, size_t limit, const char* format, va_list arguments);
 #endif
 
 #endif

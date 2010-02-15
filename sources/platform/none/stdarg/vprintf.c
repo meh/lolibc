@@ -19,7 +19,7 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <arch/stdarg.h>
+#include <platform/stdarg.h>
 
 int
 __vprintf (const char* format, va_list arguments)

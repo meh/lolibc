@@ -19,10 +19,10 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <arch/stdarg.h>
 #include <stdio.h>
+
+#include <platform/stdarg.h>
 #include <private/stdarg.h>
-#include <private/stdio.h>
 
 int
 __vfprintf (FILE* stream, const char* format, va_list arguments)

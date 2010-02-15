@@ -22,8 +22,4 @@
 #ifndef _LOLIBC_ARCH_STDLIB_H
 #define _LOLIBC_ARCH_STDLIB_H
 
-#include <stdlib.h>
-
-void* __malloc (size_t size);
-
 #endif

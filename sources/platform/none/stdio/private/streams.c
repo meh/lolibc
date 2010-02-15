@@ -19,8 +19,19 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <private/stdio.h>
+#include <private/stdio/iofile.h>
 
-__FILE __stdin  = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-__FILE __stdout = { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0 };
-__FILE __stderr = { 2, 0, 2, 0, 0, 0, 0, 0, 0, 0 };
+#define NEW_STD_STREAM(name, fd) \
+__IO_FILE_data __## name ##_fd = { fd }; \
+__IO_FILE __## name = { \
+    &__## name ##_fd, __IO_FILE_name, \
+    __lolibc_IO_FILE_read, __lolibc_IO_FILE_write, \
+    __lolibc_IO_FILE_seek, __lolibc_IO_FILE_tell, \
+    __lolibc_IO_FILE_flush, __lolibc_IO_FILE_close, \
+    1337 \
+};
+
+NEW_STD_STREAM(stdin, 0);
+NEW_STD_STREAM(stdout, 1);
+NEW_STD_STREAM(stderr, 2);
+

@@ -19,8 +19,8 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_PRIVATE_STDARG_H
-#define _LOLIBC_PRIVATE_STDARG_H
+#ifndef _LOLIBC_PRIVATE_STDARG_PRINTF_H
+#define _LOLIBC_PRIVATE_STDARG_PRINTF_H
 
 typedef enum __lolibc_PlaceholderType {
     Decimal, /* d, i */

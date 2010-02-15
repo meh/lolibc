@@ -19,42 +19,27 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_STDIO_H
-#define _LOLIBC_STDIO_H
+#ifndef _LOLIBC_PRIVATE_STDIO_IO_FILE_H
+#define _LOLIBC_PRIVATE_STDIO_IO_FILE_H
 
-typedef struct FILE FILE;
+#include <private/stdio/stream.h>
 
-extern FILE* __stdin;
-extern FILE* __stdout;
-extern FILE* __stderr;
+typedef ssize_t (*__lolibc_IO_FILE_read) (void* data, char* buffer, size_t size);
 
-/* C89 and C99 say they're macros. Make them happy. */
-#define stdin __stdin
-#define stdout __stdout
-#define stderr __stderr
+typedef ssize_t (*__lolibc_IO_FILE_write) (void* data, const char* buffer, size_t size);
 
-#include <stddef.h>
-#include <stdarg.h>
+typedef int (*__lolibc_IO_FILE_seek) (void* data, unsigned long position, int whence);
 
-#define EOF -1
+typedef unsigned long (*__lolibc_IO_FILE_tell) (void* data);
 
-#if defined(_GNU_SOURCE)
-PUBLIC FILE* fmemopen (void* buffer, size_t size, const char* mode);
-#endif
+typedef int (*__lolibc_IO_FILE_flush) (void* data);
 
-PUBLIC size_t fwrite (const void* buffer, size_t size, size_t number, FILE* stream);
+typedef int (*__lolibc_IO_FILE_close) (void* data);
 
-PUBLIC int fputs (const char* string, FILE* stream);
+extern const char* __IO_FILE_name;
 
-PUBLIC int fprintf (FILE* stream, const char* format, ...);
-
-
-PUBLIC int printf (const char* format, ...);
-
-PUBLIC int sprintf (char* string, const char* format, ...);
-
-#if defined(_BSD_SOURCE) || _XOPEN_SOURCE >= 500 || defined(_ISOC99_SOURCE)
-PUBLIC int snprintf (char* string, size_t limit, const char* format, ...);
-#endif
+typedef struct __IO_FILE_data {
+    int fd;
+} __IO_FILE_data;
 
 #endif
