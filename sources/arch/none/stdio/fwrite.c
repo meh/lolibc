@@ -1,7 +1,7 @@
 /****************************************************************************
 * lolibc, a C library.                                                      *
 *                                                                           *
-* Copyright (C) 2010  meh. [http://meh.doesntexist.org]                     *
+* Copyright (C) 2009  meh. [http://meh.doesntexist.org]                     *
 *                                                                           *
 * This file is part of lolibc.                                              *
 *                                                                           *
@@ -19,11 +19,29 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_PLATFORM_STDARG_H
-#define _LOLIBC_PLATFORM_STDARG_H
+#include <errno.h>
 
-#include <stdarg.h>
+#include <platform/stdio.h>
+#include <private/stdio/stream.h>
 
-PRIVATE int __vprintf (const char* format, va_list arguments);
+size_t
+__fwrite (const void* buffer, size_t size, size_t number, FILE* stream)
+{
+    __FILE* file = (__FILE*) stream;
+    ssize_t written;
 
-#endif
+    if (!__lolibc_stdio_is_valid_stream(file)) {
+        errno = EBADF;
+        return 0;
+    }
+
+    written = file->write(file, buffer, size * number);
+
+    if (written <= 0) {
+        return written;
+    }
+
+    return (written / size);
+}
+
+alias(__fwrite, fwrite, weak);

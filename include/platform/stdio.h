@@ -24,16 +24,6 @@
 
 #include <stdio.h>
 
-PRIVATE size_t __fwrite (const void* buffer, size_t size, size_t number, FILE* stream);
-
 PRIVATE int __printf (const char* format, ...);
-
-PRIVATE int __fprintf (FILE* stream, const char* format, ...);
-
-PRIVATE int __sprintf (char* string, const char* format, ...);
-
-#if defined(_BSD_SOURCE) || _XOPEN_SOURCE >= 500 || defined(_ISOC99_SOURCE)
-PRIVATE int __snprintf (char* string, size_t limit, const char* format, ...);
-#endif
 
 #endif

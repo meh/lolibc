@@ -24,6 +24,12 @@
 
 #include <stdarg.h>
 
-PRIVATE int __vprintf (const char* format, va_list arguments);
+PRIVATE int __vfprintf (FILE* stream, const char* format, va_list arguments);
+
+PRIVATE int __vsprintf (char* string, const char* format, va_list arguments);
+
+#if defined(_BSD_SOURCE) || _XOPEN_SOURCE >= 500 || defined(_ISOC99_SOURCE)
+PRIVATE int __vsnprintf (char* string, size_t limit, const char* format, va_list arguments);
+#endif
 
 #endif

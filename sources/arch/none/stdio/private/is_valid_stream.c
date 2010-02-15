@@ -19,11 +19,11 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <private/stdio.h>
+#include <private/stdio/stream.h>
 
 int
 __lolibc_stdio_is_valid_stream (__FILE* stream)
 {
-    return (stream->fd >= 0 && stream->magic == 1337);
+    return (stream->magic == 1337);
 }
 

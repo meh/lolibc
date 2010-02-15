@@ -19,22 +19,19 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <errno.h>
+#ifndef _LOLIBC_PLATFORM_STDIO_H
+#define _LOLIBC_PLATFORM_STDIO_H
 
-#include <platform/stdio.h>
-#include <private/stdio.h>
+#include <stdio.h>
 
-size_t
-__fwrite (const void* buffer, size_t size, size_t number, FILE* stream)
-{
-    size_t written = 0;
+PRIVATE size_t __fwrite (const void* buffer, size_t size, size_t number, FILE* stream);
 
-    if (!__lolibc_stdio_is_valid_stream((__FILE*) stream)) {
-        errno = EBADF;
-        return 0;
-    }
+PRIVATE int __fprintf (FILE* stream, const char* format, ...);
 
-    return written;
-}
+PRIVATE int __sprintf (char* string, const char* format, ...);
 
-alias(__fwrite, fwrite, weak);
+#if defined(_BSD_SOURCE) || _XOPEN_SOURCE >= 500 || defined(_ISOC99_SOURCE)
+PRIVATE int __snprintf (char* string, size_t limit, const char* format, ...);
+#endif
+
+#endif

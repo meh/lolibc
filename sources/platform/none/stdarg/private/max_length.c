@@ -19,8 +19,8 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <arch/stdarg.h>
-#include <private/stdarg.h>
+#include <platform/stdarg.h>
+#include <private/stdarg/printf.h>
 
 size_t
 __lolibc_stdarg_max_length (const char* format)
