@@ -39,3 +39,4 @@ __strchrnul (const char* string, int compareTo)
     return (char*) &string[i];
 }
 
+alias(__strchrnul, strchrnul);

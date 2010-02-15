@@ -37,3 +37,4 @@ __strcat (char* destination, const char* source)
     return destination;
 }
 
+alias(__strcat, strcat);

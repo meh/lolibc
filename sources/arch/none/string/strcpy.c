@@ -37,3 +37,4 @@ __strcpy (char* destination, const char* source)
     return destination;
 }
 
+alias(__strcpy, strcpy);

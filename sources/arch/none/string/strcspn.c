@@ -48,3 +48,4 @@ __strcspn (const char* string, const char* reject)
     return i;
 }
 
+alias(__strcspn, strcspn);

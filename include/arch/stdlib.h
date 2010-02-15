@@ -24,6 +24,6 @@
 
 #include <stdlib.h>
 
-inline void* __malloc (size_t size);
+void* __malloc (size_t size);
 
 #endif

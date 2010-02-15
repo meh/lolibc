@@ -23,7 +23,7 @@
 #include <linux/unistd.h>
 
 void
-__exit (int status)
+___exit (int status)
 {
     asm volatile (
         "int $0x80"
@@ -33,3 +33,5 @@ __exit (int status)
     );
 }
 
+alias(___exit, _exit);
+alias(___exit, _Exit);

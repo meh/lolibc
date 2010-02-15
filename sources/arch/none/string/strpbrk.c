@@ -52,3 +52,4 @@ __strpbrk (const char* string, const char* accept)
     return NULL;
 }
 
+alias(__strpbrk, strpbrk);

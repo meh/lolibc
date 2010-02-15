@@ -32,3 +32,4 @@ __fprintf (FILE* stream, const char* format, ...)
     return __vfprintf(stream, format, arguments);
 }
 
+alias(__fprintf, fprintf);

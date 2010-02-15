@@ -23,15 +23,16 @@
 #define _LOLIBC_ARCH_STDIO_H
 
 #include <stdio.h>
+#include <stddef.h>
 
-inline int __printf (const char* format, ...);
+PRIVATE int __printf (const char* format, ...);
 
-inline int __fprintf (FILE* stream, const char* format, ...);
+PRIVATE int __fprintf (FILE* stream, const char* format, ...);
 
-inline int __sprintf (char* string, const char* format, ...);
+PRIVATE int __sprintf (char* string, const char* format, ...);
 
 #if defined(_BSD_SOURCE) || _XOPEN_SOURCE >= 500 || defined(_ISOC99_SOURCE)
-inline int __snprintf (char* string, size_t limit, const char* format, ...);
+PRIVATE int __snprintf (char* string, size_t limit, const char* format, ...);
 #endif
 
 #endif

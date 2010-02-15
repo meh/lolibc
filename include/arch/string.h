@@ -24,70 +24,70 @@
 
 #include <string.h>
 
-inline void* __memccpy (void* destination, const void* source, int compareTo, size_t bytes);
+PRIVATE void* __memccpy (void* destination, const void* source, int compareTo, size_t bytes);
 
-inline void* __memchr (const void* memory, int compareTo, size_t bytes);
+PRIVATE void* __memchr (const void* memory, int compareTo, size_t bytes);
 
 #if defined(_GNU_SOURCE)
-inline void* __memrchr (const void* memory, int compareTo, size_t bytes);
+PRIVATE void* __memrchr (const void* memory, int compareTo, size_t bytes);
 
-inline void* __rawmemchr (const void* memory, int compareTo);
+PRIVATE void* __rawmemchr (const void* memory, int compareTo);
 #endif
 
-inline int __memcmp (const void* first, const void* second, size_t bytes);
+PRIVATE int __memcmp (const void* first, const void* second, size_t bytes);
 
-inline void* __memcpy (void* destination, const void* source, size_t bytes);
+PRIVATE void* __memcpy (void* destination, const void* source, size_t bytes);
 
-inline void* __memmove (void* destination, const void* source, size_t bytes);
+PRIVATE void* __memmove (void* destination, const void* source, size_t bytes);
 
-inline void* __memset (void* memory, int setTo, size_t bytes);
+PRIVATE void* __memset (void* memory, int setTo, size_t bytes);
 
 #if defined(_GNU_SOURCE) && 0
-inline char* __strcasestr (const char* string, const char* find);
+PRIVATE char* __strcasestr (const char* string, const char* find);
 #endif
 
-inline char* __strcat (char* destination, const char* source);
+PRIVATE char* __strcat (char* destination, const char* source);
 
-inline char* __strchr (const char* string, int compareTo);
+PRIVATE char* __strchr (const char* string, int compareTo);
 
 #if defined(_GNU_SOURCE)
-inline char* __strchrnul (const char* string, int compareTo);
+PRIVATE char* __strchrnul (const char* string, int compareTo);
 #endif
 
-inline int __strcmp (const char* first, const char* second);
+PRIVATE int __strcmp (const char* first, const char* second);
 
-inline char* __strcpy (char* destination, const char* source);
+PRIVATE char* __strcpy (char* destination, const char* source);
 
-inline size_t __strcspn (const char* string, const char* reject);
+PRIVATE size_t __strcspn (const char* string, const char* reject);
 
-inline char* __strdup (const char* string);
+PRIVATE char* __strdup (const char* string);
 
 #if defined(_GNU_SOURCE)
-inline char* __strndup (const char* string, size_t limit);
+PRIVATE char* __strndup (const char* string, size_t limit);
 
 #if 0
 I refuse to implement alloca, it's pure faggotry.
 
-inline char* __strdupa (const char* string);
+PRIVATE char* __strdupa (const char* string);
 
-inline char* __strndupa (const char* string, size_t limit);
+PRIVATE char* __strndupa (const char* string, size_t limit);
 #endif
 #endif
 
-inline size_t __strlen (const char* string);
+PRIVATE size_t __strlen (const char* string);
 
-inline char* __strncat (char* destination, const char* source, size_t limit);
+PRIVATE char* __strncat (char* destination, const char* source, size_t limit);
 
-inline int __strncmp(const char* first, const char* second, size_t limit);
+PRIVATE int __strncmp(const char* first, const char* second, size_t limit);
 
-inline char* __strncpy (char* destination, const char* source, size_t limit);
+PRIVATE char* __strncpy (char* destination, const char* source, size_t limit);
 
-inline char* __strpbrk(const char* string, const char* accept);
+PRIVATE char* __strpbrk(const char* string, const char* accept);
 
-inline char* __strrchr (const char* string, int compareTo);
+PRIVATE char* __strrchr (const char* string, int compareTo);
 
-inline size_t __strspn (const char* string, const char* accept);
+PRIVATE size_t __strspn (const char* string, const char* accept);
 
-inline char* __strstr (const char* string, const char* find);
+PRIVATE char* __strstr (const char* string, const char* find);
 
 #endif

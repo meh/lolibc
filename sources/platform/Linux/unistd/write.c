@@ -37,3 +37,4 @@ __write (int fd, const void* buffer, size_t bytes)
     return result;
 }
 
+alias(__write, write);

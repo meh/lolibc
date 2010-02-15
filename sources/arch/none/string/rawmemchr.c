@@ -35,3 +35,4 @@ __rawmemchr (const void* memory, int compareTo)
     return (void*) &(((char*) memory)[i]);
 }
 
+alias(__rawmemchr, rawmemchr);

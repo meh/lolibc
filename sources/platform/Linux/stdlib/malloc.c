@@ -1,7 +1,7 @@
 /****************************************************************************
 * lolibc, a C library.                                                      *
 *                                                                           *
-* Copyright (C) 2010  meh. [http://meh.doesntexist.org]                     *
+* Copyright (C) 2009  meh. [http://meh.doesntexist.org]                     *
 *                                                                           *
 * This file is part of lolibc.                                              *
 *                                                                           *
@@ -19,33 +19,10 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#define _BSD_SOURCE
-#define _GNU_SOURCE
+#include <arch/stdlib.h>
 
-#include <stdarg.h>
-#include <arch/stdarg.h>
-
-int
-vprintf (const char* format, va_list arguments)
+void*
+__malloc (size_t size)
 {
-    return __vprintf(format, arguments);
+    return NULL;
 }
-
-int
-vfprintf (FILE* stream, const char* format, va_list arguments)
-{
-    return __vfprintf(stream, format, arguments);
-}
-
-int
-vsprintf (char* string, const char* format, va_list arguments)
-{
-    return __vsprintf(string, format, arguments);
-}
-
-int
-vsnprintf (char* string, size_t limit, const char* format, va_list arguments)
-{
-    return __vsnprintf(string, limit, format, arguments);
-}
-

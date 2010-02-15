@@ -32,3 +32,4 @@ __printf (const char* format, ...)
     return __vprintf(format, arguments);
 }
 
+alias(__printf, printf);

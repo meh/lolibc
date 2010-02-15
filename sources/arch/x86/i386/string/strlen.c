@@ -38,3 +38,4 @@ __strlen (const char* string)
     return (-length) - 2;
 }
 
+alias(__strlen, strlen);

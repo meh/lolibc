@@ -33,3 +33,4 @@ __memcpy (void* destination, const void* source, size_t bytes)
     return destination;
 }
 
+alias(__memcpy, memcpy);

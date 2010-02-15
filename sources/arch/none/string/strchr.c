@@ -36,3 +36,4 @@ char* __strchr (const char* string, int compareTo)
     return NULL;
 }
 
+alias(__strchr, strchr);

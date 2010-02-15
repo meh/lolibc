@@ -24,14 +24,14 @@
 
 #include <stdarg.h>
 
-inline int __vprintf (const char* format, va_list arguments);
+PRIVATE int __vprintf (const char* format, va_list arguments);
 
-inline int __vfprintf (FILE* stream, const char* format, va_list arguments);
+PRIVATE int __vfprintf (FILE* stream, const char* format, va_list arguments);
 
-inline int __vsprintf (char* string, const char* format, va_list arguments);
+PRIVATE int __vsprintf (char* string, const char* format, va_list arguments);
 
 #if defined(_BSD_SOURCE) || _XOPEN_SOURCE >= 500 || defined(_ISOC99_SOURCE)
-inline int __vsnprintf (char* string, size_t limit, const char* format, va_list arguments);
+PRIVATE int __vsnprintf (char* string, size_t limit, const char* format, va_list arguments);
 #endif
 
 #endif

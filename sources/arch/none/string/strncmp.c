@@ -44,3 +44,5 @@ __strncmp (const char *first, const char *second, size_t limit)
 
     return 0;
 }
+
+alias(__strncmp, strncmp);

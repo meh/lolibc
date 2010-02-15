@@ -131,15 +131,16 @@ file 'include/features.h' do
 #   define  __END_NAMESPACE }
 #
 #   define PUBLIC extern "C"
+#   define PRIVATE 
 #else
 #   define __BEGIN_NAMESPACE(name)
 #   define __END_NAMESPACE
 #
 #   define PUBLIC extern
+#   define PRIVATE
 #endif
 
-#define strong_alias(name, aliasname) PUBLIC __typeof (name) aliasname __attribute__ ((alias (#name)))
-#define weak_alias(name, aliasname) PUBLIC __typeof (name) aliasname __attribute__ ((weak, alias (#name)))
+#define alias(name, aliasname, ...) PUBLIC typeof (name) aliasname __attribute__ ((alias (#name), ## __VA_ARGS__))
 
 #endif
 })
@@ -158,6 +159,7 @@ file "lib#{NAME}.so" => :compile do
 end
 
 file "lib#{NAME}.a" => :compile do
+    sh "rm -f lib#{NAME}.a"
     sh "#{AR} rcs lib#{NAME}.a #{OBJECTS}"
 end
 

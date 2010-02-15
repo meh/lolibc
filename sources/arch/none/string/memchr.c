@@ -35,3 +35,4 @@ __memchr (const void* memory, int compareTo, size_t bytes)
     return NULL;
 }
 
+alias(__memchr, memchr);

@@ -33,3 +33,4 @@ __memset (void* memory, int setTo, size_t bytes)
     return memory;
 }
 
+alias(__memset, memset);

@@ -27,3 +27,4 @@ __islower (int ch)
     return (ch >= 0x61 && ch <= 0x7A);
 }
 
+alias(__islower, islower);

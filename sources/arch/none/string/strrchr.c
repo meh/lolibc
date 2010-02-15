@@ -35,3 +35,4 @@ __strrchr (const char* string, int compareTo)
     return NULL;
 }
 
+alias(__strrchr, strrchr);

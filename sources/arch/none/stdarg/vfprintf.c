@@ -20,7 +20,7 @@
 ****************************************************************************/
 
 #include <arch/stdarg.h>
-#include <unistd.h>
+#include <stdio.h>
 #include <private/stdarg.h>
 #include <private/stdio.h>
 
@@ -38,7 +38,7 @@ __vfprintf (FILE* stream, const char* format, va_list arguments)
 
     while (format[i] != '\0') {
         if (format[i] == '%') {
-            write(file->fd, tmp, tmpLength);
+            fwrite(file, tmp, tmpLength);
 
             argument = va_arg(arguments, void*);
             length   = __lolibc_stdarg_length_single(&format[i], argument);
@@ -60,3 +60,4 @@ __vfprintf (FILE* stream, const char* format, va_list arguments)
     return printed;
 }
 
+alias(__vprintf, vprintf);

@@ -19,15 +19,14 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
+#include <unistd.h>
+
 #include <arch/stdlib.h>
 
-void*
-__malloc (size_t size)
+void
+__exit (int status)
 {
-    if (size == 0) {
-        return NULL;
-    }
-
-    return NULL;
+    _exit(status & 255);
 }
 
+alias(__exit, exit);

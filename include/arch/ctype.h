@@ -24,40 +24,40 @@
 
 #include <ctype.h>
 
-inline int __isalnum (int ch);
+PRIVATE inline int __isalnum (int ch);
 
-inline int __isalpha (int ch);
+PRIVATE inline int __isalpha (int ch);
 
 #if defined(_BSD_SOURCE) || defined(_SVID_SOURCE) || defined(_XOPEN_SOURCE)
-inline int __isascii (int ch);
+PRIVATE inline int __isascii (int ch);
 #endif
 
 #if _XOPEN_SOURCE >= 600 || defined(_ISOC99_SOURCE)
-inline int __isblank (int ch);
+PRIVATE inline int __isblank (int ch);
 #endif
 
-inline int __iscntrl (int ch);
+PRIVATE inline int __iscntrl (int ch);
 
-inline int __isdigit (int ch);
+PRIVATE inline int __isdigit (int ch);
 
-inline int __isgraph (int ch);
+PRIVATE inline int __isgraph (int ch);
 
-inline int __islower (int ch);
+PRIVATE inline int __islower (int ch);
 
-inline int __isprint (int ch);
+PRIVATE inline int __isprint (int ch);
 
-inline int __ispunct (int ch);
+PRIVATE inline int __ispunct (int ch);
 
-inline int __isspace (int ch);
+PRIVATE inline int __isspace (int ch);
 
-inline int __isupper (int ch);
+PRIVATE inline int __isupper (int ch);
 
-inline int __isxdigit (int ch);
+PRIVATE inline int __isxdigit (int ch);
 
-inline int __toascii (int ch);
+PRIVATE inline int __toascii (int ch);
 
-inline int __tolower (int ch);
+PRIVATE inline int __tolower (int ch);
 
-inline int __toupper (int ch);
+PRIVATE inline int __toupper (int ch);
 
 #endif

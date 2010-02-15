@@ -33,3 +33,4 @@ __strlen (const char* string)
     return length;
 }
 
+alias(__strlen, strlen);

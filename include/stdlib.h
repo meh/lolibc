@@ -28,6 +28,8 @@ PUBLIC void* malloc (size_t size);
 
 PUBLIC void exit (int status);
 
+PUBLIC void _Exit (int status);
+
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE 1
 

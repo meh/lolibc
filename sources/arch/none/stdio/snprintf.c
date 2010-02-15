@@ -34,3 +34,4 @@ __snprintf (char* string, size_t limit, const char* format, ...)
     return __vsnprintf(string, limit, format, arguments);
 }
 
+alias(__snprintf, snprintf);

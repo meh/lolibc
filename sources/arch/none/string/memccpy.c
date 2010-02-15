@@ -37,3 +37,4 @@ __memccpy (void* destination, const void* source, int compareTo, size_t bytes)
     return NULL;
 }
 
+alias(__memcpy, memcpy);
