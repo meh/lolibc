@@ -22,19 +22,19 @@
 #ifndef _LOLIBC_PRIVATE_STDIO_IO_FILE_H
 #define _LOLIBC_PRIVATE_STDIO_IO_FILE_H
 
-#include <private/stdio/stream.h>
+#include "stream.h"
 
-typedef ssize_t (*__lolibc_IO_FILE_read) (void* data, char* buffer, size_t size);
+PRIVATE ssize_t (*__lolibc_IO_FILE_read) (void* data, char* buffer, size_t size);
 
-typedef ssize_t (*__lolibc_IO_FILE_write) (void* data, const char* buffer, size_t size);
+PRIVATE ssize_t (*__lolibc_IO_FILE_write) (void* data, const char* buffer, size_t size);
 
-typedef int (*__lolibc_IO_FILE_seek) (void* data, unsigned long position, int whence);
+PRIVATE int (*__lolibc_IO_FILE_seek) (void* data, unsigned long position, int whence);
 
-typedef unsigned long (*__lolibc_IO_FILE_tell) (void* data);
+PRIVATE unsigned long (*__lolibc_IO_FILE_tell) (void* data);
 
-typedef int (*__lolibc_IO_FILE_flush) (void* data);
+PRIVATE int (*__lolibc_IO_FILE_flush) (void* data);
 
-typedef int (*__lolibc_IO_FILE_close) (void* data);
+PRIVATE int (*__lolibc_IO_FILE_close) (void* data);
 
 extern const char* __IO_FILE_name;
 

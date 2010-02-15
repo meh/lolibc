@@ -23,27 +23,27 @@
 #define _LOLIBC_PRIVATE_STDARG_PRINTF_H
 
 typedef enum __lolibc_PlaceholderType {
-    Decimal, /* d, i */
-    DecimalUnsigned, /* u */
-    Octal, /* o */
-    Hexadecimal, /* x */
-    HexadecimalCAPS, /* X */
-    DoubleExponent, /* e */
-    DoubleExponentCAPS, /* E */
-    Double, /* f */
-    DoubleCAPS, /* F */
-    DoubleShorter, /* g */
-    DoubleShorterCAPS, /* G */
-    Char, /* c */
-    CharWide, /* lc (C deprecated) */
-    String, /* s */
-    StringWide, /* ls (S deprecated) */
-    Pointer, /* p */
-    Printed, /* n */
-    Percent, /* % */
+    PlaceholderDecimal, /* d, i */
+    PlaceholderDecimalUnsigned, /* u */
+    PlaceholderOctal, /* o */
+    PlaceholderHexadecimal, /* x */
+    PlaceholderHexadecimalCAPS, /* X */
+    PlaceholderDoubleExponent, /* e */
+    PlaceholderDoubleExponentCAPS, /* E */
+    PlaceholderDouble, /* f */
+    PlaceholderDoubleCAPS, /* F */
+    PlaceholderDoubleShorter, /* g */
+    PlaceholderDoubleShorterCAPS, /* G */
+    PlaceholderChar, /* c */
+    PlaceholderCharWide, /* lc (C deprecated) */
+    PlaceholderString, /* s */
+    PlaceholderStringWide, /* ls (S deprecated) */
+    PlaceholderPointer, /* p */
+    PlaceholderPrinted, /* n */
+    PlaceholderPercent, /* % */
 
-    Error, /* m (GNU extension) */
-};
+    PlaceholderError, /* m (GNU extension) */
+} __lolibc_PlaceholderType;
 
 size_t __lolibc_stdarg_convert (const char* format, void* argument, char* buffer);
 

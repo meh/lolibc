@@ -37,8 +37,8 @@ typedef int (*__lolibc_FILE_flush) (void* data);
 typedef int (*__lolibc_FILE_close) (void* data);
 
 typedef struct __FILE {
-    void* data;  /* the GNU "cookie" */
-    char* type;  /* name of the stream, passed when registering a stream */
+    void*       data;  /* the GNU "cookie" */
+    const char* type;  /* name of the stream, passed when registering a stream */
 
     __lolibc_FILE_read  read;
     __lolibc_FILE_write write;
@@ -47,7 +47,7 @@ typedef struct __FILE {
     __lolibc_FILE_flush flush;
     __lolibc_FILE_close close;
 
-    short magic; /* used for validity checking */
+    long magic; /* used for validity checking */
 } __FILE;
 
 int __lolibc_FILE_is_valid_stream (__FILE* stream);

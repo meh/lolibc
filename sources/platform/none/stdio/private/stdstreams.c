@@ -21,17 +21,24 @@
 
 #include <private/stdio/iofile.h>
 
+#define STREAM(name) __## name
+
 #define NEW_STD_STREAM(name, fd) \
 __IO_FILE_data __## name ##_fd = { fd }; \
-__IO_FILE __## name = { \
-    &__## name ##_fd, __IO_FILE_name, \
-    __lolibc_IO_FILE_read, __lolibc_IO_FILE_write, \
-    __lolibc_IO_FILE_seek, __lolibc_IO_FILE_tell, \
-    __lolibc_IO_FILE_flush, __lolibc_IO_FILE_close, \
-    1337 \
-};
+__FILE STREAM(name); \
+STREAM(name).data  = &__## name ##_fd; \
+STREAM(name).type  = __IO_FILE_name; \
+STREAM(name).read  = __lolibc_IO_FILE_read; \
+STREAM(name).write =__lolibc_IO_FILE_write; \
+STREAM(name).seek  = __lolibc_IO_FILE_seek; \
+STREAM(name).tell  = __lolibc_IO_FILE_tell; \
+STREAM(name).flush = __lolibc_IO_FILE_flush; \
+STREAM(name).close = __lolibc_IO_FILE_close; \
+STREAM(name).magic = 1337
 
 NEW_STD_STREAM(stdin, 0);
+
 NEW_STD_STREAM(stdout, 1);
+
 NEW_STD_STREAM(stderr, 2);
 
