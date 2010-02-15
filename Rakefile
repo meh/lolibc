@@ -7,8 +7,7 @@ RELEASE = '0.0.1'
 CC = 'clang'
 AR = 'ar'
 
-CFLAGS   = '-Wall -Wextra -Winline -Wno-long-long -I./include'
-LDFLAGS  = '-s'
+CFLAGS = '-Wall -Wextra -Winline -Wno-long-long -I./include'
 
 if !ARGV.include?('test')
     CFLAGS << ' -nostdlib -nodefaultlibs -fno-builtin -finline-functions'
@@ -104,7 +103,7 @@ if ENV['OPTIMIZED'] != 'false'
     CFLAGS << ' -Os'
 end
 
-if !ENV['PLATFORM']
+if !defined? ENV['PLATFORM']
     ENV['PLATFORM'] = 'Linux'
 end
 
@@ -113,7 +112,17 @@ case ENV['PLATFORM']
         CFLAGS << ' -D_PLATFORM_LINUX'
 end
 
-SOURCES.include("sources/platform/#{ENV['PLATFORM']}/**/*.c");
+if !ENV['KERNEL']
+    SOURCES.include("sources/platform/#{ENV['PLATFORM']}/**/*.c");
+
+    fallbacks = FileList['sources/platform/none/**/*.c']
+
+    SOURCES.each {|file|
+        fallbacks.exclude(File.basename(file))
+    }
+
+    SOURCES.include(fallbacks)
+end
 
 OBJECTS = SOURCES.ext('o')
 
@@ -155,7 +164,7 @@ end
 task :compile => ['include/features.h'].concat(OBJECTS)
 
 file "lib#{NAME}.so" => :compile do
-    sh "#{CC} #{LDFLAGS} #{CFLAGS} -shared -Wl,-soname,lib#{NAME}.so -o lib#{NAME}.so #{OBJECTS}"
+    sh "#{CC} #{CFLAGS} -dynamiclib -shared -Wl,-soname,lib#{NAME}.so -o lib#{NAME}.so #{OBJECTS}"
 end
 
 file "lib#{NAME}.a" => :compile do
@@ -167,7 +176,7 @@ task :test do
     tests = FileList['test/**/*.c']
 
     tests.each {|test|
-        pipe   = IO.popen("#{CC} #{CFLAGS} -o test/test #{test} -L. -llolibc 2>&1");
+        pipe   = IO.popen("#{CC} #{CFLAGS} -o test/test #{test} -L. -static -llolibc 2>&1");
         output = pipe.read.chomp
         pipe.close
 
