@@ -22,7 +22,7 @@
 #ifndef _LOLIBC_PRIVATE_STDARG_H
 #define _LOLIBC_PRIVATE_STDARG_H
 
-enum __lolibc_stdarg_Type {
+typedef enum __lolibc_PlaceholderType {
     Decimal, /* d, i */
     DecimalUnsigned, /* u */
     Octal, /* o */
