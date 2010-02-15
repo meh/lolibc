@@ -19,31 +19,22 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_PRIVATE_STDIO_H
-#define _LOLIBC_PRIVATE_STDIO_H
+#include <errno.h>
 
-typedef enum __lolibc_StreamType {
-    StreamFile,
-    StreamString
-} __lolibc_StreamType;
+#include <arch/stdio.h>
+#include <private/stdio.h>
 
-typedef struct __FILE {
-    char                fd;             /* File descriptor            */
+size_t
+__fwrite (const void* buffer, size_t size, size_t number, FILE* stream)
+{
+    size_t written = 0;
 
-    __lolibc_StreamType type;           /* stream type */
-    unsigned            flags;          /* File status flags          */
+    if (!__lolibc_stdio_is_valid_stream((__FILE*) stream)) {
+        errno = EBADF;
+        return 0;
+    }
 
-    int                 level;          /* fill/empty level of buffer */
-    unsigned char       hold;           /* Ungetc char if no buffer   */
-    int                 bufferSize;     /* Buffer size                */
-    unsigned char*      buffer;         /* Data transfer buffer       */
-    unsigned char*      currentPointer; /* Current active pointer     */
+    return written;
+}
 
-    unsigned char       isTemporary;    /* Temporary file indicator   */
-
-    short               magic;          /* Used for validity checking */
-} __FILE;
-
-int __lolibc_stdio_is_valid_stream (__FILE* stream);
-
-#endif
+alias(__fwrite, fwrite);

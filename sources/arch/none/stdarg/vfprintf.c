@@ -27,8 +27,6 @@
 int
 __vfprintf (FILE* stream, const char* format, va_list arguments)
 {
-    __FILE* file = (__FILE*) stream;
-
     size_t      printed   = 0;
     size_t      length    = 0;
     size_t      i         = 0;
@@ -38,7 +36,7 @@ __vfprintf (FILE* stream, const char* format, va_list arguments)
 
     while (format[i] != '\0') {
         if (format[i] == '%') {
-            fwrite(file, tmp, tmpLength);
+            fwrite(tmp, sizeof(char), tmpLength, stream);
 
             argument = va_arg(arguments, void*);
             length   = __lolibc_stdarg_length_single(&format[i], argument);

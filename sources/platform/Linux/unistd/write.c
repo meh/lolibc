@@ -25,16 +25,16 @@
 ssize_t
 __write (int fd, const void* buffer, size_t bytes)
 {
-    ssize_t result;
+    ssize_t written;
 
     asm volatile (
         "int $0x80"
-        : "=a" (result)
+        : "=a" (written)
         : "a" (__NR_write), "b" (fd), "c" (buffer), "d" (bytes)
         : "%eax", "%ebx", "%ecx", "%edx"
     );
 
-    return result;
+    return written;
 }
 
 alias(__write, write);

@@ -25,6 +25,8 @@
 #include <stdio.h>
 #include <stddef.h>
 
+PRIVATE size_t __fwrite (const void* buffer, size_t size, size_t number, FILE* stream);
+
 PRIVATE int __printf (const char* format, ...);
 
 PRIVATE int __fprintf (FILE* stream, const char* format, ...);

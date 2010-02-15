@@ -38,6 +38,8 @@ extern FILE* __stderr;
 
 #define EOF -1
 
+PUBLIC size_t fwrite (const void* buffer, size_t size, size_t number, FILE* stream);
+
 PUBLIC int fputs (const char* string, FILE* stream);
 
 PUBLIC int printf (const char* format, ...);
