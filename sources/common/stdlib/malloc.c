@@ -19,7 +19,7 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <platform/stdlib.h>
+#include <internal/stdlib.h>
 #include <private/stdlib/malloc.h>
 
 void*

@@ -21,7 +21,7 @@
 
 #define _ISOC99_SOURCE
 
-#include <arch/ctype.h>
+#include <internal/ctype.h>
 
 int
 __isblank (int ch)

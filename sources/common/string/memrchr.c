@@ -21,7 +21,7 @@
 
 #define _GNU_SOURCE 1
 
-#include <arch/string.h>
+#include <internal/string.h>
 
 void*
 __memrchr (const void* memory, int compareTo, size_t bytes)

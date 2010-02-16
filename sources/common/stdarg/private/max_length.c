@@ -19,7 +19,7 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <platform/stdarg.h>
+#include <internal/stdarg.h>
 #include <private/stdarg/printf.h>
 
 size_t

@@ -21,7 +21,7 @@
 
 #include <stdlib.h>
 
-#include <arch/string.h>
+#include <internal/string.h>
 
 void*
 __memmove (void *destination, const void *source, size_t limit)

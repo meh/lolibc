@@ -22,7 +22,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-#include <arch/string.h>
+#include <internal/string.h>
 
 char*
 __strdup (const char* string)

@@ -19,7 +19,7 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <arch/string.h>
+#include <internal/string.h>
 
 void*
 __memchr (const void* memory, int compareTo, size_t bytes)

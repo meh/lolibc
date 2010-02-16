@@ -21,8 +21,8 @@
 
 #define _BSD_SOURCE
 
-#include <arch/stdio.h>
-#include <arch/stdarg.h>
+#include <internal/stdio.h>
+#include <internal/stdarg.h>
 
 int
 __snprintf (char* string, size_t limit, const char* format, ...)

@@ -19,7 +19,7 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <platform/unistd.h>
+#include <internal/unistd.h>
 #include <linux/unistd.h>
 
 ssize_t

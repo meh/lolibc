@@ -19,7 +19,7 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <arch/string.h>
+#include <internal/string.h>
 
 int
 __strncmp (const char *first, const char *second, size_t limit)

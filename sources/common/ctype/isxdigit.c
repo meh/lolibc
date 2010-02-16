@@ -19,7 +19,7 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <arch/ctype.h>
+#include <internal/ctype.h>
 
 int
 __isxdigit (int ch)

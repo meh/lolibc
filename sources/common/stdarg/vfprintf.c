@@ -21,7 +21,7 @@
 
 #include <stdio.h>
 
-#include <platform/stdarg.h>
+#include <internal/stdarg.h>
 #include <private/stdarg/printf.h>
 
 int

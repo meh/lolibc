@@ -23,7 +23,7 @@
 
 #include <stdio.h>
 
-#include <platform/stdarg.h>
+#include <internal/stdarg.h>
 
 int
 __vsprintf (char* string, const char* format, va_list arguments)

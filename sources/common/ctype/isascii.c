@@ -21,7 +21,7 @@
 
 #define _BSD_SOURCE
 
-#include <arch/ctype.h>
+#include <internal/ctype.h>
 
 int
 __isascii (int ch)

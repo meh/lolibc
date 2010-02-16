@@ -19,7 +19,7 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <arch/string.h>
+#include <internal/string.h>
 
 char*
 __strncat (char* destination, const char* source, size_t limit)

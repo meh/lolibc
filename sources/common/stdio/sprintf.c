@@ -19,8 +19,8 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <arch/stdio.h>
-#include <arch/stdarg.h>
+#include <internal/stdio.h>
+#include <internal/stdarg.h>
 
 int
 __sprintf (char* string, const char* format, ...)

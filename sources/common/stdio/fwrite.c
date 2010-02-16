@@ -21,7 +21,7 @@
 
 #include <errno.h>
 
-#include <platform/stdio.h>
+#include <internal/stdio.h>
 #include <private/stdio/stream.h>
 
 size_t

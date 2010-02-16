@@ -21,7 +21,7 @@
 
 #include <unistd.h>
 
-#include <arch/stdlib.h>
+#include <internal/stdlib.h>
 
 void
 __exit (int status)
