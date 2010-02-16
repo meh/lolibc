@@ -24,6 +24,8 @@
 
 #include <stddef.h>
 
+#define __LOLIBC_FILE_MAGIC 31337610L
+
 typedef ssize_t (*__lolibc_FILE_read) (void* data, char* buffer, size_t size);
 
 typedef ssize_t (*__lolibc_FILE_write) (void* data, const char* buffer, size_t size);

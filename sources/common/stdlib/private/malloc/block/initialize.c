@@ -19,17 +19,15 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_ARCH_STDLIB_H
-#define _LOLIBC_ARCH_STDLIB_H
+#include <private/stdlib/malloc/block.h>
 
-#include <stdlib.h>
+int
+__lolibc_malloc_block_initialize (__lolibc_malloc_block* block, size_t size)
+{
+    block->magic       = __LOLIBC_MALLOC_MAGIC;
+    block->isAvailable = 0;
+    block->size        = size;
 
-PRIVATE void __abort (void);
+    return 1;
+}
 
-PRIVATE void __free (void* address);
-
-PRIVATE void* __malloc (size_t size);
-
-PRIVATE void __exit (int status);
-
-#endif

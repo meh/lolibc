@@ -19,17 +19,11 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_ARCH_STDLIB_H
-#define _LOLIBC_ARCH_STDLIB_H
+#include <internal/stdlib.h>
 
-#include <stdlib.h>
+void
+__abort (void)
+{
+}
 
-PRIVATE void __abort (void);
-
-PRIVATE void __free (void* address);
-
-PRIVATE void* __malloc (size_t size);
-
-PRIVATE void __exit (int status);
-
-#endif
+alias(__abort, abort, weak);

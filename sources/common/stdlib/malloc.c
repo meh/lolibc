@@ -20,12 +20,46 @@
 ****************************************************************************/
 
 #include <internal/stdlib.h>
-#include <private/stdlib/malloc.h>
+#include <private/stdlib/malloc/malloc.h>
 
 void*
 __malloc (size_t size)
 {
-    return (void*) size;
+    void*                  current = __lolibc_malloc_memory_start;
+    __lolibc_malloc_block* currentBlock;
+    __lolibc_malloc_block* tmp;
+
+    while (current != __lolibc_malloc_memory_end) {
+        currentBlock = (__lolibc_malloc_block*) current;
+
+        // if the memory block is available and big enough
+        if (currentBlock->isAvailable && currentBlock->size >= size) {
+            // if there's memory left, let's create an available block on the unused memory
+            if (currentBlock->size < size && currentBlock->size > sizeof(__lolibc_malloc_block)) {
+                tmp = (__lolibc_malloc_block*) (current + size + sizeof(__lolibc_malloc_block));
+                __lolibc_malloc_block_initialize(tmp, currentBlock->size - size - sizeof(__lolibc_malloc_block));
+                currentBlock->size = size;
+            }
+            else {
+                currentBlock->isAvailable = 0;
+            }
+        }
+
+        current += currentBlock->size + sizeof(__lolibc_malloc_block);
+    }
+
+    if (current == __lolibc_malloc_memory_end) {
+        if (__lolibc_malloc_increase_heap(size + sizeof(__lolibc_malloc_block)) < 0) {
+            abort();
+        }
+
+        currentBlock                = __lolibc_malloc_memory_end;
+        __lolibc_malloc_memory_end += size + sizeof(__lolibc_malloc_block);
+
+        __lolibc_malloc_block_initialize(currentBlock, size);
+    }
+
+    return __lolibc_malloc_block_to_address(currentBlock);
 }
 
 alias(__malloc, malloc, weak);

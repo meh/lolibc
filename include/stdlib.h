@@ -24,6 +24,8 @@
 
 #include <stddef.h>
 
+PUBLIC void abort (void);
+
 PUBLIC void* malloc (size_t size);
 
 PUBLIC void exit (int status);

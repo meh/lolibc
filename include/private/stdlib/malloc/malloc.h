@@ -22,4 +22,17 @@
 #ifndef _LOLIBC_PRIVATE_STDLIB_MALLOC_H
 #define _LOLIBC_PRIVATE_STDLIB_MALLOC_H
 
+#include <stddef.h>
+
+#define __LOLIBC_MALLOC_MAGIC 23421337L
+
+extern void* __lolibc_malloc_memory_start;
+extern void* __lolibc_malloc_memory_end;
+
+#include <private/stdlib/malloc/block.h>
+
+PRIVATE void __lolibc_malloc_initialize (void) __attribute__((constructor(0)));
+
+PRIVATE int __lolibc_malloc_increase_heap (ssize_t increment);
+
 #endif

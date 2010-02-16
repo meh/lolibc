@@ -19,6 +19,18 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-const char* __IO_FILE_name = "IO_FILE";
+#include <private/stdlib/malloc/block.h>
 
-#include <private/stdio/iofile.h>
+__lolibc_malloc_block*
+__lolibc_malloc_block_from_address (void* address)
+{
+    __lolibc_malloc_block* block = (__lolibc_malloc_block*) (address - sizeof(__lolibc_malloc_block));
+
+    if (__lolibc_malloc_block_is_valid(block)) {
+        return block;
+    }
+    else {
+        return NULL;
+    }
+}
+
