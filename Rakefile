@@ -27,9 +27,13 @@ if !ARGV.include?('clean') && !ARGV.include?('clobber')
 
             case command[1]
                 when 'require'
-                    path = command[2].match(/(".*?")/)[1]
-                    result = preprocess("#{File.dirname(file)}/#{eval(path)}", [/\/\*.*?\*\/(\s*\n)*/ms, /(\s*\n)*$/ms])
+                    path = "#{File.dirname(file)}/#{eval command[2].match(/(".*?")/)[1]}"
 
+                    if !File.exists?(path)
+                        raise "@required \"#{path}\": file not found."
+                    end
+
+                    result = preprocess(path, [/\/\*.*?\*\/(\s*\n)*/ms, /(\s*\n)*$/ms])
             end
 
             result
