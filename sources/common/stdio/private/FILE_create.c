@@ -19,26 +19,16 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <private/stdio/iofile.h>
+#include <private/stdio/stream.h>
 
-#define STREAM(name) __## name
+__FILE*
+__lolibc_FILE_create (void* data, const char* type,
+    __lolibc_FILE_read read, __lolibc_FILE_write write,
+    __lolibc_FILE_seek seek, __lolibc_FILE_tell tell,
+    __lolibc_FILE_flush flush, __lolibc_FILE_close close)
+{
+    __FILE* file = malloc(sizeof(__FILE));
 
-#define NEW_STD_STREAM(name, fd) \
-__IO_FILE_data __## name ##_fd = { fd }; \
-__FILE STREAM(name); \
-STREAM(name).data  = &__## name ##_fd; \
-STREAM(name).type  = __IO_FILE_name; \
-STREAM(name).read  = __lolibc_IO_FILE_read; \
-STREAM(name).write =__lolibc_IO_FILE_write; \
-STREAM(name).seek  = __lolibc_IO_FILE_seek; \
-STREAM(name).tell  = __lolibc_IO_FILE_tell; \
-STREAM(name).flush = __lolibc_IO_FILE_flush; \
-STREAM(name).close = __lolibc_IO_FILE_close; \
-STREAM(name).magic = 1337
-
-NEW_STD_STREAM(stdin, 0);
-
-NEW_STD_STREAM(stdout, 1);
-
-NEW_STD_STREAM(stderr, 2);
+    return __lolibc_FILE_initialize(file, data, type, read, write, seek, tell, flush, close);
+}
 

@@ -50,6 +50,19 @@ typedef struct __FILE {
     long magic; /* used for validity checking */
 } __FILE;
 
-int __lolibc_FILE_is_valid_stream (__FILE* stream);
+PRIVATE __FILE* __lolibc_FILE_create (void* data, const char* type,
+    __lolibc_FILE_read read, __lolibc_FILE_write write,
+    __lolibc_FILE_seek seek, __lolibc_FILE_tell tell,
+    __lolibc_FILE_flush flush, __lolibc_FILE_close close
+);
+
+PRIVATE __FILE* __lolibc_FILE_initialize (__FILE* file, void* data, const char* type,
+    __lolibc_FILE_read read, __lolibc_FILE_write write,
+    __lolibc_FILE_seek seek, __lolibc_FILE_tell tell,
+    __lolibc_FILE_flush flush, __lolibc_FILE_close close
+);
+
+
+PRIVATE int __lolibc_FILE_is_valid_stream (__FILE* stream);
 
 #endif

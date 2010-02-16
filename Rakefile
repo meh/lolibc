@@ -38,20 +38,18 @@ case ENV['ARCH']
             ENV['SPECIFIC'] = 'i386'
         end
 
+        CFLAGS << " -D_ARCH_SPECIFIC_#{ENV['SPECIFIC']}"
+
     when 'x86_64'
         CFLAGS << ' -D_ARCH_X86_64'
-        ENV['64bit'] = 'true'
+        ENV['64bit']    = 'true'
 
-        ENV['SPECIFIC'] = '.'
-
-    else
-        ENV['ARCH']     = 'none'
         ENV['SPECIFIC'] = '.'
 end
 
-SOURCES.include("sources/arch/#{ENV['ARCH']}/#{ENV['SPECIFIC']}/**/*.c")
+if ENV['ARCH']
+    SOURCES.include("sources/arch/#{ENV['ARCH']}/#{ENV['SPECIFIC']}/**/*.c")
 
-if ENV['ARCH'] != 'none'
     if ENV['ARCH'] == 'x86'
         drop = false
         archs = FileList["sources/arch/#{ENV['ARCH']}/*"]
@@ -114,15 +112,17 @@ end
 
 if !ENV['KERNEL']
     SOURCES.include("sources/platform/#{ENV['PLATFORM']}/**/*.c");
-
-    fallbacks = FileList['sources/platform/none/**/*.c']
-
-    SOURCES.each {|file|
-        fallbacks.exclude(File.basename(file))
-    }
-
-    SOURCES.include(fallbacks)
 end
+
+fallbacks = FileList['sources/common/**/*.c']
+
+SOURCES.each {|file|
+    fallbacks.exclude(File.basename(file))
+}
+
+SOURCES.include(fallbacks)
+
+SOURCES.resolve.existing!
 
 OBJECTS = SOURCES.ext('o')
 

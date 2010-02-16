@@ -20,7 +20,7 @@
 ****************************************************************************/
 
 #include <platform/stdlib.h>
-#include <private/stdlib.h>
+#include <private/stdlib/malloc.h>
 
 void*
 __malloc (size_t size)
