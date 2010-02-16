@@ -24,6 +24,7 @@
 #include <stdio.h>
 
 #include <internal/stdarg.h>
+#include <private/stdarg/printf.h>
 
 int
 __vsprintf (char* string, const char* format, va_list arguments)

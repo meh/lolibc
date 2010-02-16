@@ -19,6 +19,8 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
+#include <stdlib.h>
+
 #include <private/stdio/stream.h>
 
 __FILE*

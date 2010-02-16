@@ -25,7 +25,7 @@
 void*
 __malloc (size_t size)
 {
-
+    return (void*) size;
 }
 
 alias(__malloc, malloc, weak);
