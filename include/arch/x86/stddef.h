@@ -19,18 +19,7 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_PLATFORM_UNISTD_H
-#define _LOLIBC_PLATFORM_UNISTD_H
+#define __WORDSIZE 32
 
-#include <unistd.h>
-
-PRIVATE int __brk (void* address);
-
-PRIVATE void* __sbrk (intptr_t increment)
-
-PRIVATE void __exit (int status);
-
-PRIVATE ssize_t __write (int fd, const void* buffer, size_t bytes);
-
-#endif
-
+typedef unsigned int size_t;
+typedef          int ssize_t;

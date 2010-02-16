@@ -18,6 +18,39 @@ end
 CLEAN.include('sources/**/*.o', 'include/features.h')
 CLOBBER.include('*.so', '*.a')
 
+if !ARGV.include?('clean') && !ARGV.include?('clobber')
+    def preprocess (file, strip=[])
+        content = File.read(file)
+
+        content.gsub(/^@.*? .*?$/) {|string|
+            command = string.match(/^@(.*?) (.*?)$/)
+
+            case command[1]
+                when 'require'
+                    path = command[2].match(/(".*?")/)[1]
+                    preprocess("#{File.dirname(file)}/#{eval(path)}", [/\/\*.*?\*\//ms])
+
+            end
+        }
+
+        strip.each {|re|
+            content.gsub!(re, '')
+        }
+
+        return content
+    end
+
+    FileList['include/*.h.in'].each {|header|
+        file = File.new(header.sub(/\.in$/, ''), 'w')
+        file.write(preprocess(header))
+        file.close
+    }
+else
+    FileList['include/*.h.in'].each {|header|
+        CLEAN.include(header.sub(/\.in$/, ''))
+    }
+end
+
 SOURCES = FileList['sources/*.c']
 
 if ENV['ARCH']

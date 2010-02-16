@@ -23,9 +23,14 @@
 #define _LOLIBC_UNISTD_H
 
 #include <stddef.h>
+#include <stdint.h>
 
-PUBLIC ssize_t write (int fd, const void* buffer, size_t bytes);
+PUBLIC int brk (void* address);
+
+PUBLIC void* sbrk (intptr_t increment);
 
 PUBLIC void _exit (int status);
+
+PUBLIC ssize_t write (int fd, const void* buffer, size_t bytes);
 
 #endif
