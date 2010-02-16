@@ -26,7 +26,7 @@
 
 PRIVATE int __brk (void* address);
 
-PRIVATE void* __sbrk (intptr_t increment)
+PRIVATE void* __sbrk (intptr_t increment);
 
 PRIVATE void __exit (int status);
 

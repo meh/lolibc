@@ -22,15 +22,17 @@ if !ARGV.include?('clean') && !ARGV.include?('clobber')
     def preprocess (file, strip=[])
         content = File.read(file)
 
-        content.gsub(/^@.*? .*?$/) {|string|
+        content.gsub!(/^@.*? .*?$/) {|string|
             command = string.match(/^@(.*?) (.*?)$/)
 
             case command[1]
                 when 'require'
                     path = command[2].match(/(".*?")/)[1]
-                    preprocess("#{File.dirname(file)}/#{eval(path)}", [/\/\*.*?\*\//ms])
+                    result = preprocess("#{File.dirname(file)}/#{eval(path)}", [/\/\*.*?\*\/(\s*\n)*/ms, /(\s*\n)*$/ms])
 
             end
+
+            result
         }
 
         strip.each {|re|
