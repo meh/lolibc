@@ -1,7 +1,7 @@
 /****************************************************************************
 * lolibc, a C library.                                                      *
 *                                                                           *
-* Copyright (C) 2010  meh. [http://meh.doesntexist.org]                     *
+* Copyright (C) 2009  meh. [http://meh.doesntexist.org]                     *
 *                                                                           *
 * This file is part of lolibc.                                              *
 *                                                                           *
@@ -19,11 +19,45 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_PLATFORM_STDARG_H
-#define _LOLIBC_PLATFORM_STDARG_H
+#ifndef _LOLIBC_INTERNAL_STRING_H
+#define _LOLIBC_INTERNAL_STRING_H
 
-#include <stdarg.h>
+#include <ctype.h>
 
-PRIVATE int __vprintf (const char* format, va_list arguments);
+PRIVATE inline int __isalnum (int ch);
+
+PRIVATE inline int __isalpha (int ch);
+
+#if defined(_BSD_SOURCE) || defined(_SVID_SOURCE) || defined(_XOPEN_SOURCE)
+PRIVATE inline int __isascii (int ch);
+#endif
+
+#if _XOPEN_SOURCE >= 600 || defined(_ISOC99_SOURCE)
+PRIVATE inline int __isblank (int ch);
+#endif
+
+PRIVATE inline int __iscntrl (int ch);
+
+PRIVATE inline int __isdigit (int ch);
+
+PRIVATE inline int __isgraph (int ch);
+
+PRIVATE inline int __islower (int ch);
+
+PRIVATE inline int __isprint (int ch);
+
+PRIVATE inline int __ispunct (int ch);
+
+PRIVATE inline int __isspace (int ch);
+
+PRIVATE inline int __isupper (int ch);
+
+PRIVATE inline int __isxdigit (int ch);
+
+PRIVATE inline int __toascii (int ch);
+
+PRIVATE inline int __tolower (int ch);
+
+PRIVATE inline int __toupper (int ch);
 
 #endif

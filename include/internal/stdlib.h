@@ -19,11 +19,13 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_PLATFORM_STDIO_H
-#define _LOLIBC_PLATFORM_STDIO_H
+#ifndef _LOLIBC_ARCH_STDLIB_H
+#define _LOLIBC_ARCH_STDLIB_H
 
-#include <stdio.h>
+#include <stdlib.h>
 
-PRIVATE int __printf (const char* format, ...);
+PRIVATE void* __malloc (size_t size);
+
+PRIVATE void __exit (int status);
 
 #endif

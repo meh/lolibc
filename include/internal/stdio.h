@@ -19,13 +19,22 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_PLATFORM_STDLIB_H
-#define _LOLIBC_PLATFORM_STDLIB_H
+#ifndef _LOLIBC_INTERNAL_STDIO_H
+#define _LOLIBC_INTERNAL_STDIO_H
 
-#include <stdlib.h>
+#include <stdio.h>
 
-PRIVATE void* __malloc (size_t size);
 
-PRIVATE void __exit (int status);
+PRIVATE size_t __fwrite (const void* buffer, size_t size, size_t number, FILE* stream);
+
+PRIVATE int __fprintf (FILE* stream, const char* format, ...);
+
+PRIVATE int __printf (const char* format, ...);
+
+PRIVATE int __sprintf (char* string, const char* format, ...);
+
+#if defined(_BSD_SOURCE) || _XOPEN_SOURCE >= 500 || defined(_ISOC99_SOURCE)
+PRIVATE int __snprintf (char* string, size_t limit, const char* format, ...);
+#endif
 
 #endif
