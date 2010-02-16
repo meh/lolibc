@@ -40,7 +40,7 @@ __FILE* __stderr = NULL;
         __lolibc_IO_FILE_read, __lolibc_IO_FILE_write, \
         __lolibc_IO_FILE_seek, __lolibc_IO_FILE_tell, \
         __lolibc_IO_FILE_flush, __lolibc_IO_FILE_close \
-    )
+    ); __## name = &___## name
 
 NEW_FILE(stdin, 0);
 NEW_FILE(stdout, 1);

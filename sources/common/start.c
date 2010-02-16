@@ -28,6 +28,14 @@ PUBLIC
 void
 _start (int argc, char** argv, char** envp)
 {
-    exit(main(argc, argv, envp));
+    int code;
+
+    // must call constructors here
+
+    code = main(argc, argv, envp);
+
+    // must call destructors here
+
+    exit(code);
 }
 
