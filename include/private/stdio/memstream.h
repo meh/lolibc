@@ -19,18 +19,28 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <stdio.h>
+#ifndef _LOLIBC_PRIVATE_STDIO_MEMSTREAM_H
+#define _LOLIBC_PRIVATE_STDIO_MEMSTREAM_H
 
-#include <internal/stdarg.h>
-#include <private/stdarg/printf.h>
+#include "stream.h"
 
-int
-__vsprintf (char* string, const char* format, va_list arguments)
-{
-    size_t length = __lolibc_stdarg_length(format, arguments);
-    FILE*  stream = fmemopen(string, length, "w");
+PRIVATE ssize_t (*__lolibc_MEMSTREAM_read) (void* data, char* buffer, size_t size);
 
-    return vfprintf(stream, format, arguments);
-}
+PRIVATE ssize_t (*__lolibc_MEMSTREAM_write) (void* data, const char* buffer, size_t size);
 
-alias(__vsprintf, vsprintf, weak);
+PRIVATE int (*__lolibc_MEMSTREAM_seek) (void* data, unsigned long position, int whence);
+
+PRIVATE unsigned long (*__lolibc_MEMSTREAM_tell) (void* data);
+
+PRIVATE int (*__lolibc_MEMSTREAM_flush) (void* data);
+
+PRIVATE int (*__lolibc_MEMSTREAM_close) (void* data);
+
+extern const char* __MEMSTREAM_name;
+
+typedef struct __MEMSTREAM_data {
+    char*  buffer;
+    size_t length;
+} __MEMSTREAM_data;
+
+#endif

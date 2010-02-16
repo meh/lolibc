@@ -24,6 +24,9 @@
 
 #include <stdio.h>
 
+#if defined(_GNU_SOURCE)
+FILE* __fmemopen (void* buffer, size_t size, const char* mode);
+#endif
 
 PRIVATE size_t __fwrite (const void* buffer, size_t size, size_t number, FILE* stream);
 

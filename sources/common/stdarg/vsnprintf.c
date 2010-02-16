@@ -19,13 +19,15 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
+#define _BSD_SOURCE
+
 #include <stdio.h>
 
 #include <internal/stdarg.h>
 #include <private/stdarg/printf.h>
 
 int
-__vsprintf (char* string, const char* format, va_list arguments)
+__vsnprintf (char* string, size_t limit, const char* format, va_list arguments)
 {
     size_t length = __lolibc_stdarg_length(format, arguments);
     FILE*  stream = fmemopen(string, length, "w");

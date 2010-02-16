@@ -34,7 +34,7 @@ case ENV['ARCH']
         CFLAGS << ' -D_ARCH_X86'
         ENV['32bit'] = 'true'
 
-        if !defined? ENV['SPECIFIC']
+        if !ENV['SPECIFIC']
             ENV['SPECIFIC'] = 'i386'
         end
 
@@ -71,24 +71,17 @@ if ENV['ARCH']
             end
         }
 
-        archs.reverse.each {|file|
-            fallbacks = FileList["sources/arch/#{ENV['ARCH']}/#{File.basename(file)}/**/**.c"]
+        archs.reverse.each {|arch|
+            arch = File.basename(arch)
+            fallbacks = FileList["sources/arch/#{ENV['ARCH']}/#{arch}/**/**.c"]
 
             SOURCES.each {|file|
-                fallbacks.exclude("/#{File.basename(file)}")
+                fallbacks.exclude(file.sub(/^.*?\/arch\/.*?\/.*?\//,  ''))
             }
 
             SOURCES.include(fallbacks)
         }
     end
-
-    fallbacks = FileList['sources/arch/none/**/*.c']
-
-    SOURCES.each {|file|
-        fallbacks.exclude("/#{File.basename(file)}")
-    }
-
-    SOURCES.include(fallbacks)
 end
 
 if ENV['32bit']
@@ -116,8 +109,14 @@ end
 
 fallbacks = FileList['sources/common/**/*.c']
 
+if ENV['SPECIFIC']
+    regexp = /^.*?\/(#{ENV['PLATFORM']}|arch\/.*?\/.*?)\//
+else
+    regexp = /^.*?\/(#{ENV['PLATFORM']}|#{ENV['ARCH']})\//
+end
+
 SOURCES.each {|file|
-    fallbacks.exclude("/#{File.basename(file)}")
+    fallbacks.exclude(file.sub(regexp, ''))
 }
 
 SOURCES.include(fallbacks)

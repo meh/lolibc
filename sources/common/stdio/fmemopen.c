@@ -19,18 +19,17 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <stdio.h>
+#include <errno.h>
 
-#include <internal/stdarg.h>
-#include <private/stdarg/printf.h>
+#define _GNU_SOURCE
 
-int
-__vsprintf (char* string, const char* format, va_list arguments)
+#include <internal/stdio.h>
+#include <private/stdio/memstream.h>
+
+FILE*
+__fmemopen (void* buffer, size_t size, const char* mode)
 {
-    size_t length = __lolibc_stdarg_length(format, arguments);
-    FILE*  stream = fmemopen(string, length, "w");
-
-    return vfprintf(stream, format, arguments);
+    return NULL;
 }
 
-alias(__vsprintf, vsprintf, weak);
+alias(__fmemopen, fmemopen);
