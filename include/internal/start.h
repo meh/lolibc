@@ -28,7 +28,7 @@ PRIVATE void ___init (void);
 
 PRIVATE void ___fini (void);
 
-PRIVATE void _start (int argc, char** argv, char** envp);
+PRIVATE void ___start (int argc, char** argv, char** envp);
 
 #endif
 

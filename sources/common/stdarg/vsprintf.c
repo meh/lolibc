@@ -19,6 +19,8 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
+#define _GNU_SOURCE
+
 #include <stdio.h>
 
 #include <internal/stdarg.h>

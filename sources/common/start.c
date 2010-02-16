@@ -25,22 +25,22 @@
 #include <internal/start.h>
 
 void
-__lolibc_main_init (void)
+___init (void)
 {
-    write(1, "lol\n", 4);
+    // TODO: call constructors
 }
 
 void
-__lolibc_main_fini (void)
+___fini (void)
 {
-    write(1, "omg\n", 4);
+    // TODO: call destructors
 }
 
-alias(__lolibc_main_init, _init, weak);
-alias(__lolibc_main_fini, _fini, weak);
+alias(___init, _init, weak);
+alias(___fini, _fini, weak);
 
 void
-__lolibc_main_start (int argc, char** argv, char** envp)
+___start (int argc, char** argv, char** envp)
 {
     int result;
 
@@ -53,4 +53,4 @@ __lolibc_main_start (int argc, char** argv, char** envp)
     exit(result);
 }
 
-alias(__lolibc_main_start, _start, weak);
+alias(___start, _start, weak);
