@@ -1,8 +1,22 @@
 lolibc - C library implementation.
 
-Will be completed when we'll get to run POSIX shit, for clang purposes.
+Why not use glibc, you might ask.
+
+Well, glibc's building system is really really ugly, the code is old and ugly, and lot of stuff
+isn't designed in a good way (good as in "a way that I like").
+
+Rewriting it to be easily embeddable in a kernel, to be easily ported to new platforms and to be
+easily optimized for new architectures, this is lolibc's aim.
+
+At first it was just a "let's do it for lulzKey", but now I think I can get this to be something
+useful.
+
+I know that for the moment the license is a real open source nazi restriction, I'll change license
+to LGPL someday, maybe.
+
+At the moment the library isn't even compilable by GCC (clang is a lot smarter), so, have fun ^_^
 
 Used software:
-    - sys-devel/clang-1.0
+    - sys-devel/clang-9999 (SVN)
     - dev-lang/ruby-1.8.7
     - dev-ruby/rake-0.8.7
