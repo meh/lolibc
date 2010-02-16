@@ -24,7 +24,7 @@
 
 #include <features.h>
 
-#if __x86_64
+#if defined(__x86_64__)
 #   define __WORDSIZE 64
 
     typedef unsigned long size_t;

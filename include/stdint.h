@@ -22,7 +22,7 @@
 #ifndef _LOLIBC_STDINT_H
 #define _LOLIBC_STDINT_H
 
-#if defined(__x86_64)
+#if defined(__x86_64__)
     typedef signed char int8_t;
     typedef short int   int16_t;
     typedef int         int32_t;
