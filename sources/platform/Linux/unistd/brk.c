@@ -19,27 +19,30 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_STDINT_H
-#define _LOLIBC_STDINT_H
+#include <errno.h>
+#include <linux/unistd.h>
 
-#include <stddef.h>
+#include <internal/unistd.h>
 
-#if __WORDSIZE == 32
-    typedef signed char     int8_t;
-    typedef short int       int16_t;
-    typedef int             int32_t;
-    typedef long long int   int64_t;
+void* __lolibc_current_brk = NULL;
 
-    typedef int intptr_t;
+int
+__brk (void* address)
+{
+    void* tmp = __lolibc_current_brk;
 
-    #define INT8_MAX    (127)
-#else
-    typedef signed char int8_t;
-    typedef short int   int16_t;
-    typedef int         int32_t;
-    typedef long int    int64_t;
+    asm volatile (
+        "int $0x80"
+        : "=a" (__lolibc_current_brk)
+        : "a" (__NR_brk), "b" (address)
+    );
 
-    typedef long int    intptr_t;
-#endif
+    if (tmp == __lolibc_current_brk) {
+        errno = ENOMEM;
+        return -1;
+    }
 
-#endif
+    return 0;
+}
+
+alias(__brk, brk, weak);

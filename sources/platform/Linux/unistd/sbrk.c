@@ -19,27 +19,31 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#ifndef _LOLIBC_STDINT_H
-#define _LOLIBC_STDINT_H
+#include <errno.h>
 
-#include <stddef.h>
+#include <internal/unistd.h>
 
-#if __WORDSIZE == 32
-    typedef signed char     int8_t;
-    typedef short int       int16_t;
-    typedef int             int32_t;
-    typedef long long int   int64_t;
+extern void* __lolibc_current_brk;
 
-    typedef int intptr_t;
+void*
+__sbrk (intptr_t increment)
+{
+    // initialize the current brk if it's not initialized
+    if (__lolibc_current_brk == NULL) {
+        brk(0);
+    }
 
-    #define INT8_MAX    (127)
-#else
-    typedef signed char int8_t;
-    typedef short int   int16_t;
-    typedef int         int32_t;
-    typedef long int    int64_t;
+    void* initial = __lolibc_current_brk;
 
-    typedef long int    intptr_t;
-#endif
+    if (increment != 0) {
+        if (brk((void*) (((char*) initial) + increment)) < 0) {
+            errno = ENOMEM;
 
-#endif
+            initial = (void*) -1;
+        }
+    }
+
+    return initial;
+}
+
+alias(__sbrk, sbrk);

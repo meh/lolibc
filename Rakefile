@@ -75,7 +75,7 @@ if ENV['ARCH']
             fallbacks = FileList["sources/arch/#{ENV['ARCH']}/#{File.basename(file)}/**/**.c"]
 
             SOURCES.each {|file|
-                fallbacks.exclude(File.basename(file))
+                fallbacks.exclude("/#{File.basename(file)}")
             }
 
             SOURCES.include(fallbacks)
@@ -85,7 +85,7 @@ if ENV['ARCH']
     fallbacks = FileList['sources/arch/none/**/*.c']
 
     SOURCES.each {|file|
-        fallbacks.exclude(File.basename(file))
+        fallbacks.exclude("/#{File.basename(file)}")
     }
 
     SOURCES.include(fallbacks)
@@ -117,7 +117,7 @@ end
 fallbacks = FileList['sources/common/**/*.c']
 
 SOURCES.each {|file|
-    fallbacks.exclude(File.basename(file))
+    fallbacks.exclude("/#{File.basename(file)}")
 }
 
 SOURCES.include(fallbacks)
