@@ -24,17 +24,52 @@
 
 extern int main (int argc, char** argv, char** envp);
 
+typedef void (*__cdtor) (void);
+
+static __cdtor __lolibc_ctors[] __attribute__ ((section (".ctors"))) = { (void*) 0 };
+static __cdtor __lolibc_dtors[] __attribute__ ((section (".dtors"))) = { (void*) 0 };
+
+static
+void
+__execute_ctors (__cdtor list[])
+{
+    __cdtor* function = list;
+
+    // execute backwards, because Linux does so.
+    while (*function) {
+        function++;
+    }
+
+    while (*function) {
+        (*function)();
+        function--;
+    }
+}
+
+static
+void
+__execute_dtors (__cdtor list[])
+{
+    __cdtor* function = list;
+
+    // execute backwards, because Linux does so.
+    while (*function) {
+        (*function)();
+        function++;
+    }
+}
+
 PUBLIC
 void
 _start (int argc, char** argv, char** envp)
 {
     int code;
 
-    // must call constructors here
+    __execute_ctors(__lolibc_ctors);
 
     code = main(argc, argv, envp);
 
-    // must call destructors here
+    __execute_dtors(__lolibc_dtors);
 
     exit(code);
 }

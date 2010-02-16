@@ -30,7 +30,7 @@ __fwrite (const void* buffer, size_t size, size_t number, FILE* stream)
     __FILE* file = (__FILE*) stream;
     ssize_t written;
 
-    if (!__lolibc_stdio_is_valid_stream(file)) {
+    if (!__lolibc_FILE_is_valid_stream(file)) {
         errno = EBADF;
         return 0;
     }

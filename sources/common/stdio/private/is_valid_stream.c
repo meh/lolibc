@@ -22,7 +22,7 @@
 #include <private/stdio/stream.h>
 
 int
-__lolibc_stdio_is_valid_stream (__FILE* stream)
+__lolibc_FILE_is_valid_stream (__FILE* stream)
 {
     return (stream->magic == 1337);
 }
