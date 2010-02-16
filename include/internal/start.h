@@ -19,38 +19,16 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#include <stdlib.h>
-#include <unistd.h>
+#ifndef _LOLIBC_INTERNAL_START_H
+#define _LOLIBC_INTERNAL_START_H
 
-#include <internal/start.h>
+extern int main (int argc, char** argv, char** envp);
 
-void
-__lolibc_main_init (void)
-{
-    write(1, "lol\n", 4);
-}
+PRIVATE void ___init (void);
 
-void
-__lolibc_main_fini (void)
-{
-    write(1, "omg\n", 4);
-}
+PRIVATE void ___fini (void);
 
-alias(__lolibc_main_init, _init, weak);
-alias(__lolibc_main_fini, _fini, weak);
+PRIVATE void _start (int argc, char** argv, char** envp);
 
-void
-__lolibc_main_start (int argc, char** argv, char** envp)
-{
-    int result;
+#endif
 
-    _init();
-
-    result = main(argc, argv, envp);
-
-    _fini();
-
-    exit(result);
-}
-
-alias(__lolibc_main_start, _start, weak);

@@ -30,7 +30,7 @@ __sbrk (intptr_t increment)
 {
     // initialize the current brk if it's not initialized
     if (__lolibc_current_brk == NULL) {
-        brk(0);
+        brk(NULL);
     }
 
     void* initial = __lolibc_current_brk;
@@ -46,4 +46,4 @@ __sbrk (intptr_t increment)
     return initial;
 }
 
-alias(__sbrk, sbrk);
+alias(__sbrk, sbrk, weak);

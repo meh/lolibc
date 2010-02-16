@@ -46,11 +46,10 @@ NEW_FILE(stdin, 0);
 NEW_FILE(stdout, 1);
 NEW_FILE(stderr, 2);
 
-static void initialize (void) __attribute__ ((constructor));
+void __lolibc_stdio_stdstreams_initialize (void) __attribute__ ((constructor));
 
-static
 void
-initialize (void)
+__lolibc_stdio_stdstreams_initialize (void)
 {
     INITIALIZE_FILE(stdin);
     INITIALIZE_FILE(stdout);
