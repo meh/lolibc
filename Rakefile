@@ -18,46 +18,7 @@ end
 CLEAN.include('sources/**/*.o', 'include/features.h')
 CLOBBER.include('*.so', '*.a')
 
-if !ARGV.include?('clean') && !ARGV.include?('clobber')
-    def preprocess (file, strip=[])
-        content = File.read(file)
-
-        content.gsub!(/^@.*? .*?$/) {|string|
-            command = string.match(/^@(.*?) (.*?)$/)
-
-            case command[1]
-                when 'require'
-                    path = "#{File.dirname(file)}/#{eval command[2].match(/(".*?")/)[1]}"
-
-                    if !File.exists?(path)
-                        raise "@required \"#{path}\": file not found."
-                    end
-
-                    result = preprocess(path, [/\/\*.*?\*\/(\s*\n)*/ms, /(\s*\n)*$/ms])
-            end
-
-            result
-        }
-
-        strip.each {|re|
-            content.gsub!(re, '')
-        }
-
-        return content
-    end
-
-    FileList['include/*.h.in'].each {|header|
-        file = File.new(header.sub(/\.in$/, ''), 'w')
-        file.write(preprocess(header))
-        file.close
-    }
-else
-    FileList['include/*.h.in'].each {|header|
-        CLEAN.include(header.sub(/\.in$/, ''))
-    }
-end
-
-SOURCES = FileList['sources/*.c']
+SOURCES = FileList.new
 
 if ENV['ARCH']
     specific = ENV['ARCH'].match(/^(.*?)\/(.*?)$/)
@@ -164,6 +125,47 @@ SOURCES.include(fallbacks)
 SOURCES.resolve.existing!
 
 OBJECTS = SOURCES.ext('o')
+
+if !ARGV.include?('clean') && !ARGV.include?('clobber')
+    def preprocess (file, strip=[])
+        content = File.read(file)
+
+        content.gsub!(/^@.*? .*?$/) {|string|
+            command = string.match(/^@(.*?)\n(.*?)\n@$/ms)
+
+            case command[1]
+                when 'require'
+                    path = "#{File.dirname(file)}/#{eval command[2].match(/(".*?")/)[1]}"
+
+                    if !File.exists?(path)
+                        raise "@required \"#{path}\": file not found."
+                    end
+
+                    result = preprocess(path, [/\/\*.*?\*\/(\s*\n)*/ms, /(\s*\n)*$/ms])
+                when 'eval':
+                    result = eval command[2]
+            end
+
+            result
+        }
+
+        strip.each {|re|
+            content.gsub!(re, '')
+        }
+
+        return content
+    end
+
+    FileList['include/**/*.h.in'].each {|header|
+        file = File.new(header.sub(/\.in$/, ''), 'w')
+        file.write(preprocess(header))
+        file.close
+    }
+else
+    FileList['include/**/*.h.in'].each {|header|
+        CLEAN.include(header.sub(/\.in$/, ''))
+    }
+end
 
 task :default => ["lib#{NAME}.so", "lib#{NAME}.a"]
 

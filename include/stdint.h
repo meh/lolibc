@@ -19,6 +19,23 @@
 * along with lolibc.  If not, see <http://www.gnu.org/licenses/>.           *
 ****************************************************************************/
 
-#define INT8_MAX    (127)
+#ifndef _LOLIBC_STDINT_H
+#define _LOLIBC_STDINT_H
 
-typedef long int intptr_t;
+#if defined(__x86_64)
+    typedef signed char int8_t;
+    typedef short int   int16_t;
+    typedef int         int32_t;
+    typedef long int    int64_t;
+#else
+    typedef signed char     int8_t;
+    typedef short int       int16_t;
+    typedef int             int32_t;
+    typedef long long int   int64_t;
+
+    typedef long int intptr_t;
+
+    #define INT8_MAX    (127)
+#endif
+
+#endif

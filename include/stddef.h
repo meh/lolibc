@@ -24,7 +24,17 @@
 
 #include <features.h>
 
-@require "arch/#{ENV['ARCH']}/stddef.h"
+#if __x86_64
+#   define __WORDSIZE 64
+
+    typedef unsigned long size_t;
+    typedef signed   long ssize_t;
+#else
+#   define __WORDSIZE 32
+
+    typedef unsigned int size_t;
+    typedef signed   int ssize_t;
+#endif
 
 #define NULL 0
 
