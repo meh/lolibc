@@ -22,7 +22,7 @@ task :pull do
 
         Kernel.system("git branch -D '#{project}' &> /dev/null")
 
-        if !Kernel.system("git checkout --track -b '#{project}' origin/'#{project}'")
+        if !Kernel.system("git checkout --track -b '#{project}' origin/'#{project}' &> /dev/null")
             raise "Could not checkout `#{project}`"
         end
     }
@@ -37,6 +37,8 @@ task :pull do
         if !Kernel.system("git clone -b '#{project}' . '#{project}'")
             raise "Couldn't clone `#{project}`."
         end
+
+        puts "Cloned `#{project}`"
     }
 end
 
