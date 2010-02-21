@@ -6,31 +6,41 @@ RELEASE = '0.0.1'
 
 PROJECTS = ['libc', 'libm']
 
-task :default => [:pull, :compile]
+CLOBBER.include(PROJECTS)
+
+task :default => :compile
 
 task :pull do
-    begin
-        `git --version`
-    rescue
+    if !Kernel.system('git --version &> /dev/null')
         raise 'git is missing.'
     end
 
     PROJECTS.each {|project|
-        if !Kernel.system("git clone . '#{project}' &> /dev/null")
-            raise "Couldn't clone the repository to pull `#{project}`."
+        if File.exists?(project)
+            next
         end
 
-        Dir.chdir(project)
+        Kernel.system("git branch -D '#{project}' &> /dev/null")
 
-        if !Kernel.system("git checkout '#{project}' &> /dev/null")
-            raise "Couldn't checkout `#{project}` branch."
+        if !Kernel.system("git checkout --track -b '#{project}' origin/'#{project}'")
+            raise "Could not checkout `#{project}`"
+        end
+    }
+
+    Kernel.system('git checkout master &> /dev/null')
+
+    PROJECTS.each {|project|
+        if File.exists?(project)
+            next
         end
 
-        puts "Pull'd `#{project}`."
+        if !Kernel.system("git clone -b '#{project}' . '#{project}'")
+            raise "Couldn't clone `#{project}`."
+        end
     }
 end
 
-task :compile do
+task :compile => :pull do
 
 end
 
