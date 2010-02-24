@@ -34,7 +34,7 @@ task :pull do
             next
         end
 
-        if !Kernel.system("git clone -b '#{project}' . '#{project}'")
+        if !Kernel.system("git clone -b '#{project}' . '#{project}' &> /dev/null")
             raise "Couldn't clone `#{project}`."
         end
 
